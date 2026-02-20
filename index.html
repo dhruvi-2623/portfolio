@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhruviben Patel | Software Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #faf7f4;
+      --bg-warm: #fdf8f5;
+      --surface: #ffffff;
+      --text: #1e1b18;
+      --text-muted: #6b6560;
+      --accent: #c45c4a;
+      --accent-dark: #a84a3a;
+      --accent-soft: rgba(196, 92, 74, 0.14);
+      --accent-2: #8b7355;
+      --accent-2-soft: rgba(139, 115, 85, 0.12);
+      --gold: #b8860b;
+      --gold-soft: rgba(184, 134, 11, 0.12);
+      --border: #e8e2dc;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --radius: 10px;
+      --radius-lg: 16px;
+      --shadow: 0 2px 12px rgba(30, 27, 24, 0.06);
+      --shadow-hover: 0 8px 28px rgba(30, 27, 24, 0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(250, 247, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .site-header .inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .site-logo {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .site-logo:hover { color: var(--accent); }
+    .site-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.25rem;
+      font-size: 0.9rem;
+    }
+    .site-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .site-nav a:hover { color: var(--accent); }
+
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+
+    /* Hero – gradient bg + creative typography */
+    .hero {
+      padding: 5rem 0 4rem;
+      text-align: center;
+      background: linear-gradient(165deg, var(--bg) 0%, var(--bg-warm) 50%, rgba(253, 248, 245, 0.6) 100%);
+      position: relative;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      margin-bottom: 1rem;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 80%; max-width: 400px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      opacity: 0.8;
+    }
+    .hero .greeting {
+      font-size: 0.95rem;
+      color: var(--accent);
+      margin: 0 0 0.25rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 7vw, 3.5rem);
+      font-weight: 400;
+      margin: 0 0 0.35em;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    @supports (background-clip: text) or (-webkit-background-clip: text) {
+      .hero h1 {
+        background: linear-gradient(135deg, var(--text) 0%, var(--accent-2) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    }
+    .hero .tagline {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin: 0 auto 1rem;
+      max-width: 36ch;
+    }
+    .hero .location {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .hero .intro {
+      font-size: 1rem;
+      max-width: 42ch;
+      margin: 0 auto 1.75rem;
+      line-height: 1.65;
+      color: var(--text);
+    }
+    .hero .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.75rem 1rem;
+      margin-bottom: 1rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.35rem;
+      font-size: 0.9rem;
+      font-family: var(--sans);
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      color: #fff;
+    }
+    .project-card .btn-primary,
+    .project-card .btn-primary:hover {
+      color: #fff;
+      font-weight: 600;
+    }
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 4px rgba(30, 27, 24, 0.04);
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .open-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.35rem 0.85rem;
+      background: linear-gradient(135deg, var(--accent-soft) 0%, var(--gold-soft) 100%);
+      color: var(--accent-dark);
+      border-radius: 999px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .hero .contact-row {
+      margin-top: 1.25rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .hero .contact-row a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .hero .contact-row a:hover { text-decoration: underline; color: var(--accent-dark); }
+    .hero .contact-row span { margin: 0 0.5rem; color: var(--border); }
+
+    /* Section titles – label with decorative line */
+    section { padding: 3rem 0; }
+    section[id] { scroll-margin-top: 4rem; }
+    section.alt-bg {
+      background: linear-gradient(180deg, rgba(253, 248, 245, 0.6) 0%, transparent 100%);
+      border-radius: var(--radius-lg);
+      margin: 0 0.5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .about .prose a, .job-card a, .project-card a { color: var(--accent); text-decoration: none; }
+    .about .prose a:hover, .job-card a:hover, .project-card a:hover { text-decoration: underline; color: var(--accent-dark); }
+    .sec-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .sec-label::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: 1px;
+    }
+    .sec-title {
+      font-family: var(--serif);
+      font-size: 1.85rem;
+      font-weight: 400;
+      margin: 0 0 0.5rem;
+      color: var(--text);
+    }
+    .sec-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      max-width: 50ch;
+    }
+
+    /* About – value cards with colored left border */
+    .about .prose { margin-bottom: 2rem; }
+    .about .prose p { margin: 0 0 1rem; }
+    .about .prose ul {
+      margin: 1rem 0 0;
+      padding-left: 1.25rem;
+    }
+    .about .prose li { margin-bottom: 0.35rem; }
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .value-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem 1.35rem 1.35rem 1.5rem;
+      border-left: 3px solid var(--accent);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .value-card:nth-child(2) { border-left-color: var(--accent-2); }
+    .value-card:nth-child(3) { border-left-color: var(--gold); }
+    .value-card:nth-child(4) { border-left-color: var(--accent); }
+    .value-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    .value-card h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 0 0 0.35rem;
+      color: var(--text);
+    }
+    .value-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Experience – cards with shadow + hover */
+    .journey-desc { margin-bottom: 1.5rem; }
+    .job-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.5rem 1.5rem 1.65rem;
+      margin-bottom: 1rem;
+      border-left: 3px solid var(--accent-soft);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .job-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    .job-card:last-child { margin-bottom: 0; }
+    .job-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.5rem 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .job-title { font-weight: 600; font-size: 1.05rem; }
+    .job-company { color: var(--text-muted); font-size: 0.95rem; }
+    .job-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .job-meta span { margin-right: 1rem; }
+    .job ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.9rem;
+    }
+    .job li { margin-bottom: 0.3rem; }
+
+    /* Projects – cards with hover + creative pills */
+    .project-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.5rem 1.5rem 1.65rem;
+      border-left: 3px solid var(--accent);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    .project-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      color: var(--text);
+    }
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+    .tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .pill {
+      font-size: 0.72rem;
+      padding: 0.28rem 0.65rem;
+      border-radius: 999px;
+      font-weight: 500;
+    }
+    .tech-pills .pill {
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+    }
+    .tech-pills .pill:nth-child(3n) {
+      background: var(--accent-2-soft);
+      color: var(--accent-2);
+    }
+    .tech-pills .pill:nth-child(3n+2) {
+      background: var(--gold-soft);
+      color: #8b6914;
+    }
+    .project-card ul {
+      margin: 0 0 1rem;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .project-card li { margin-bottom: 0.25rem; }
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .project-links .btn { padding: 0.45rem 1rem; font-size: 0.85rem; }
+    .project-links .btn-primary { color: #fff; }
+    .badge {
+      font-size: 0.7rem;
+      padding: 0.22rem 0.55rem;
+      background: linear-gradient(135deg, var(--accent-2-soft) 0%, var(--gold-soft) 100%);
+      color: var(--accent-2);
+      border-radius: 6px;
+      margin-left: 0.5rem;
+      font-weight: 600;
+    }
+
+    /* Skills – pills with soft color variants */
+    .skills-intro { margin-bottom: 1.25rem; }
+    .skill-group {
+      margin-bottom: 1.5rem;
+    }
+    .skill-group:last-child { margin-bottom: 0; }
+    .skill-group h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin: 0 0 0.6rem;
+    }
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.5rem;
+    }
+    .skill-pills .pill {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .skill-pills .pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* Education – cards with subtle accent */
+    .edu-grid { display: flex; flex-direction: column; gap: 1rem; }
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .edu-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    .edu-degree { font-weight: 600; font-size: 1rem; margin-bottom: 0.25rem; color: var(--text); }
+    .edu-school { color: var(--text-muted); font-size: 0.95rem; }
+    .edu-date { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+    /* Certifications – cards */
+    .cert-grid { display: flex; flex-direction: column; gap: 1rem; }
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cert-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    .cert-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem; color: var(--text); }
+    .cert-issuer { color: var(--text-muted); font-size: 0.875rem; }
+    .cert-date { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+    /* Let's Connect – gradient block */
+    .connect-section {
+      background: linear-gradient(145deg, var(--bg-warm) 0%, rgba(196, 92, 74, 0.06) 50%, var(--bg-warm) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .connect-section .sec-title { margin-bottom: 0.5rem; }
+    .connect-section .sec-desc {
+      margin: 0 auto 1.5rem;
+    }
+    .connect-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem 1.5rem;
+      font-size: 0.95rem;
+    }
+    .connect-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .connect-links a:hover { color: var(--accent-dark); text-decoration: underline; }
+    .connect-location {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Footer – sticks to bottom when content is short (e.g. home), scroll to see when content is long */
+    .site-footer {
+      flex-shrink: 0;
+      padding: 2.25rem 1.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+      text-align: center;
+      background: var(--bg-warm);
+    }
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.5rem;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+    .footer-nav a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--accent-dark); text-decoration: underline; }
+    .footer-copy { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* Route views – one visible at a time; main grows so footer sticks to bottom */
+    .main { flex: 1 0 auto; min-height: 55vh; }
+    .view {
+      display: none;
+      opacity: 0;
+      padding-top: 0.5rem;
+    }
+    .view.active {
+      display: block;
+      animation: viewIn 0.45s ease forwards;
+    }
+    @keyframes viewIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-item {
+      opacity: 0;
+      animation: fadeInUp 0.5s ease forwards;
+    }
+    .view.active .animate-item { opacity: 0; }
+    .view.active .animate-item:nth-child(1) { animation-delay: 0.06s; }
+    .view.active .animate-item:nth-child(2) { animation-delay: 0.12s; }
+    .view.active .animate-item:nth-child(3) { animation-delay: 0.18s; }
+    .view.active .animate-item:nth-child(4) { animation-delay: 0.24s; }
+    .view.active .animate-item:nth-child(5) { animation-delay: 0.3s; }
+    .view.active .animate-item:nth-child(6) { animation-delay: 0.36s; }
+    .view.active .animate-item:nth-child(7) { animation-delay: 0.42s; }
+    .view.active .animate-item:nth-child(8) { animation-delay: 0.48s; }
+    .view.active .animate-item:nth-child(9) { animation-delay: 0.54s; }
+    .view.active .animate-item:nth-child(10) { animation-delay: 0.6s; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .site-nav a.active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a href="#home" class="site-logo" data-route="home">Dhruviben Patel</a>
+      <nav class="site-nav">
+        <a href="#home" data-route="home">Home</a>
+        <a href="#about" data-route="about">About</a>
+        <a href="#experience" data-route="experience">Experience</a>
+        <a href="#projects" data-route="projects">Projects</a>
+        <a href="#skills" data-route="skills">Skills</a>
+        <a href="#education" data-route="education">Education</a>
+        <a href="#certifications" data-route="certifications">Certifications</a>
+        <a href="#contact" data-route="contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="main">
+    <div class="wrap">
+      <div id="view-home" class="view active" data-view="home">
+        <section class="hero">
+      <p class="greeting animate-item">Hi, I'm</p>
+      <h1 class="animate-item">Dhruviben Patel</h1>
+      <p class="tagline animate-item">Software Engineer · iOS (SwiftUI) + Full-Stack</p>
+      <p class="location animate-item">Based in Houston, Texas, United States</p>
+      <p class="intro animate-item">I build production iOS and full-stack web systems with ASP.NET Core, React, Node.js, and Azure—focused on clean architecture, performance, and shipping software that works in the real world.</p>
+      <div class="cta-row animate-item">
+        <a href="#projects" class="btn btn-primary" data-route="projects">View my work</a>
+        <a href="mailto:dhruvipatel2623@gmail.com" class="btn btn-secondary">Get in touch</a>
+        <span class="open-badge">Open to work</span>
+      </div>
+      <p class="contact-row animate-item">
+        <a href="tel:+13464331526">+1 346-433-1526</a><span>·</span>
+        <a href="mailto:dhruvipatel2623@gmail.com">dhruvipatel2623@gmail.com</a><span>·</span>
+        <a href="https://github.com/dhruvi-2623" target="_blank" rel="noopener">GitHub</a><span>·</span>
+        <a href="https://linkedin.com/in/dhruvipatel2623" target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+    </section>
+      </div>
+
+      <div id="view-about" class="view" data-view="about">
+    <section class="page-section">
+      <p class="sec-label">About Me</p>
+      <h2 class="sec-title">Crafting software that ships</h2>
+      <p class="sec-desc">iOS, full-stack web, and end-to-end ownership—from idea to production.</p>
+      <div class="prose">
+        <p>I'm a Software Engineer currently working on production iOS applications using SwiftUI, while also building and supporting full-stack web platforms with ASP.NET Core, React/Next.js, Node.js, Azure, and SQL.</p>
+        <p>At Bigblue Technologies, I work across iOS feature development, API integration, and release validation, owning real user flows from development through production. I care deeply about clean architecture, performance, and shipping software that actually works in the real world.</p>
+        <p>Previously, I've built secure backend systems, optimized APIs, and delivered scalable web applications—always with a focus on measurable impact and end-to-end ownership, not just writing code.</p>
+        <p>I'm especially interested in roles where I can:</p>
+        <ul>
+          <li>Build and ship real products, not demos</li>
+          <li>Work across mobile, backend, and system boundaries</li>
+          <li>Take responsibility from idea → production → iteration</li>
+        </ul>
+        <p>Currently open to iOS Engineer and Software Engineer / Full-Stack opportunities.</p>
+      </div>
+      <div class="value-grid">
+        <div class="value-card animate-item">
+          <h4>iOS &amp; Mobile</h4>
+          <p>SwiftUI, MVVM, reusable components, and full guest/host flows for production apps.</p>
+        </div>
+        <div class="value-card animate-item">
+          <h4>Full-Stack Web</h4>
+          <p>ASP.NET Core, React/Next.js, Node.js, and Azure for scalable web platforms.</p>
+        </div>
+        <div class="value-card animate-item">
+          <h4>Clean Architecture</h4>
+          <p>Maintainable, performant code and systems that stand the test of time.</p>
+        </div>
+        <div class="value-card animate-item">
+          <h4>End-to-End Ownership</h4>
+          <p>From idea and development through QA, release, and iteration.</p>
+        </div>
+      </div>
+    </section>
+      </div>
+
+      <div id="view-experience" class="view" data-view="experience">
+    <section class="alt-bg">
+      <p class="sec-label">Experience</p>
+      <h2 class="sec-title">Professional journey</h2>
+      <p class="sec-desc journey-desc">From front-end to iOS and full-stack—delivering impact with measurable results.</p>
+
+      <article class="job-card animate-item">
+        <div class="job-header">
+          <span class="job-title">Developer Intern</span>
+          <span class="job-company">BigBlue Technologies</span>
+        </div>
+        <div class="job-meta">
+          <span>Part-time</span>
+          <span>Jan 2026 – Present (2 mos)</span>
+          <span>Costa Mesa, California · Remote</span>
+        </div>
+        <ul>
+          <li>Developing production iOS features using SwiftUI (MVVM), building reusable UI components and complete guest/host flows.</li>
+          <li>Integrating REST APIs and Firebase for authentication, role-based access, and real-time data updates across the iOS platform.</li>
+          <li>Owning iOS QA, TestFlight validation, and release readiness, resolving release-blocking issues before production launches.</li>
+          <li>Contributing to full-stack initiatives to ensure feature parity between iOS and web platforms.</li>
+        </ul>
+      </article>
+
+      <article class="job-card animate-item">
+        <div class="job-header">
+          <span class="job-title">Software Engineer Intern</span>
+          <span class="job-company">BiztechCS</span>
+        </div>
+        <div class="job-meta">
+          <span>Internship</span>
+          <span>Sep 2022 – Oct 2023 (1 yr 2 mos)</span>
+          <span>Ahmedabad · On-site</span>
+        </div>
+        <ul>
+          <li>Built a JWT-secured document management system, reducing manual operational effort by ~60%.</li>
+          <li>Improved API performance by ~40% through query optimization, indexing, and pagination.</li>
+          <li>Increased automated test coverage to ~85%, reducing regressions and stabilizing releases.</li>
+        </ul>
+      </article>
+
+      <article class="job-card animate-item">
+        <div class="job-header">
+          <span class="job-title">Front-End Developer Intern</span>
+          <span class="job-company">Elsner Technologies Pvt. Ltd.</span>
+        </div>
+        <div class="job-meta">
+          <span>Internship</span>
+          <span>Jul 2022 – Aug 2022 (2 mos)</span>
+          <span>Ahmedabad, Gujarat, India · On-site</span>
+        </div>
+        <ul>
+          <li>Built accessible React components from Figma designs, improving accessibility scores by ~30%.</li>
+          <li>Reduced bundle size and initial load time by ~25% through code-splitting and asset optimization.</li>
+        </ul>
+      </article>
+    </section>
+      </div>
+
+      <div id="view-projects" class="view" data-view="projects">
+    <section class="alt-bg">
+      <p class="sec-label">Featured Projects</p>
+      <h2 class="sec-title">A selection of my work</h2>
+      <p class="sec-desc">Real-time systems, healthcare platforms, service infrastructure, and trading—built with modern stacks.</p>
+
+      <div class="project-grid">
+        <article class="project-card animate-item">
+          <h3>Realtime Chat Application <span class="badge">Apr–May 2025</span></h3>
+          <p class="project-desc">Real-time chat with JWT auth, file uploads, typing indicators, and virtualized threads for smooth performance on low-end devices.</p>
+          <div class="tech-pills">
+            <span class="pill">React</span>
+            <span class="pill">Node</span>
+            <span class="pill">Socket.IO</span>
+            <span class="pill">MongoDB</span>
+            <span class="pill">JWT</span>
+            <span class="pill">CI/CD</span>
+          </div>
+          <ul>
+            <li>Secure authentication (JWT + refresh), protected routes, file/image uploads.</li>
+            <li>Typing/unread indicators, optimistic sends. Virtualized long threads, error boundaries, retry logic.</li>
+            <li>CI/CD with GitHub Actions to Vercel/Render, environment-safe config, structured logs.</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://github.com/dhruvi-2623/nodejs-reactjs-chats" class="btn btn-primary" target="_blank" rel="noopener">View code</a>
+          </div>
+        </article>
+
+        <article class="project-card animate-item">
+          <h3>Healthcare &amp; Fitness Platform Modernization</h3>
+          <p class="project-desc">HIPAA-compliant patient portal and migration from legacy VB/VBA to modern web architecture.</p>
+          <div class="tech-pills">
+            <span class="pill">ASP.NET Core</span>
+            <span class="pill">Azure</span>
+            <span class="pill">SQL Server</span>
+            <span class="pill">Twilio</span>
+            <span class="pill">Square</span>
+          </div>
+          <ul>
+            <li>Building patient portal on ASP.NET Core + Azure; AI-assisted clinical docs, Square payments, Twilio MFA.</li>
+            <li>Migrating legacy systems to enable role-based dashboards and automated clinical reporting.</li>
+          </ul>
+        </article>
+
+        <article class="project-card animate-item">
+          <h3>Service Broker System</h3>
+          <p class="project-desc">Containerized service registry with real-time status and admin dashboard for incident triage.</p>
+          <div class="tech-pills">
+            <span class="pill">Docker</span>
+            <span class="pill">Express.js</span>
+            <span class="pill">MySQL</span>
+            <span class="pill">WebSockets</span>
+            <span class="pill">OAuth2</span>
+            <span class="pill">TOTP</span>
+          </div>
+          <ul>
+            <li>Handling 200+ concurrent requests; WebSockets for real-time updates.</li>
+            <li>OAuth2 + TOTP (2FA) reducing unauthorized access by ~90%. Admin dashboard with search and filtering.</li>
+          </ul>
+        </article>
+
+        <article class="project-card animate-item">
+          <h3>Stock/Trading Platform <span class="badge">in progress</span></h3>
+          <p class="project-desc">Full-stack trading platform with role-based access, charting, order/position workflows, and AI-assisted BTC signals.</p>
+          <div class="tech-pills">
+            <span class="pill">React/TypeScript</span>
+            <span class="pill">Spring Boot</span>
+            <span class="pill">MySQL</span>
+            <span class="pill">JWT</span>
+          </div>
+          <ul>
+            <li>Spring Boot APIs, JWT auth, indexed MySQL, non-blocking market data. AI-assisted signals with feature flags.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+      </div>
+
+      <div id="view-skills" class="view" data-view="skills">
+    <section>
+      <p class="sec-label">Skills &amp; Expertise</p>
+      <h2 class="sec-title">Technologies I work with</h2>
+      <p class="sec-desc skills-intro">Front-end, backend, mobile, data, and DevOps—used in real projects and production.</p>
+
+      <div class="skill-group animate-item">
+        <h4>Frontend</h4>
+        <div class="skill-pills">
+          <span class="pill">React</span><span class="pill">Next.js</span><span class="pill">TypeScript</span><span class="pill">JavaScript</span><span class="pill">Redux</span><span class="pill">Tailwind CSS</span><span class="pill">HTML/CSS</span><span class="pill">Accessibility (WCAG)</span>
+        </div>
+      </div>
+      <div class="skill-group animate-item">
+        <h4>Backend &amp; APIs</h4>
+        <div class="skill-pills">
+          <span class="pill">Node.js</span><span class="pill">Express</span><span class="pill">ASP.NET Core</span><span class="pill">Spring Boot</span><span class="pill">REST APIs</span><span class="pill">WebSockets</span>
+        </div>
+      </div>
+      <div class="skill-group animate-item">
+        <h4>Mobile</h4>
+        <div class="skill-pills">
+          <span class="pill">Swift</span><span class="pill">SwiftUI</span><span class="pill">iOS</span><span class="pill">MVVM</span><span class="pill">Xcode</span>
+        </div>
+      </div>
+      <div class="skill-group animate-item">
+        <h4>Data &amp; Databases</h4>
+        <div class="skill-pills">
+          <span class="pill">MySQL</span><span class="pill">MongoDB</span><span class="pill">SQL Server</span><span class="pill">Data modeling</span><span class="pill">Indexing</span>
+        </div>
+      </div>
+      <div class="skill-group animate-item">
+        <h4>DevOps &amp; Tools</h4>
+        <div class="skill-pills">
+          <span class="pill">Git</span><span class="pill">CI/CD</span><span class="pill">GitHub Actions</span><span class="pill">Docker</span><span class="pill">Jest</span><span class="pill">Azure</span><span class="pill">Firebase</span><span class="pill">Vercel</span><span class="pill">Render</span>
+        </div>
+      </div>
+    </section>
+      </div>
+
+      <div id="view-education" class="view" data-view="education">
+    <section>
+      <p class="sec-label">Education</p>
+      <h2 class="sec-title">Academic foundation</h2>
+      <p class="sec-desc">Computer science and engineering—theory and applied practice.</p>
+
+      <div class="edu-grid">
+        <div class="edu-card animate-item">
+          <div class="edu-degree">Master of Science in Computer Science</div>
+          <div class="edu-school">University of Houston – Clear Lake · Houston, TX</div>
+          <div class="edu-date">August 2024 – Present</div>
+        </div>
+        <div class="edu-card animate-item">
+          <div class="edu-degree">Bachelor of Technology in Computer Engineering</div>
+          <div class="edu-school">Silver Oak University · Gujarat, India</div>
+          <div class="edu-date">August 2020 – May 2024</div>
+        </div>
+      </div>
+    </section>
+      </div>
+
+      <div id="view-certifications" class="view" data-view="certifications">
+    <section class="alt-bg">
+      <p class="sec-label">Licenses &amp; Certifications</p>
+      <h2 class="sec-title">Professional credentials</h2>
+      <p class="sec-desc">Industry-recognized certifications across cloud, software development, and AI.</p>
+
+      <div class="cert-grid">
+        <div class="cert-card animate-item">
+          <div class="cert-title">Oracle Cloud Infrastructure 2025 Certified Architect Associate</div>
+          <div class="cert-issuer">Oracle</div>
+          <div class="cert-date">Issued Sep 2025 · Expires Sep 2027</div>
+        </div>
+        <div class="cert-card animate-item">
+          <div class="cert-title">Career Essentials in Software Development by Microsoft and LinkedIn</div>
+          <div class="cert-issuer">Microsoft</div>
+          <div class="cert-date">Issued Feb 2025 · Software Development, Programming</div>
+        </div>
+        <div class="cert-card animate-item">
+          <div class="cert-title">Career Essentials in Generative AI by Microsoft and LinkedIn</div>
+          <div class="cert-issuer">Microsoft</div>
+          <div class="cert-date">Issued Feb 2025 · Computer Ethics, Artificial Intelligence (AI)</div>
+        </div>
+      </div>
+    </section>
+      </div>
+
+      <div id="view-contact" class="view" data-view="contact">
+    <section>
+      <p class="sec-label">Let's Connect</p>
+      <div class="connect-section animate-item">
+        <h2 class="sec-title">Get in touch</h2>
+        <p class="sec-desc">Have a project in mind or want to discuss iOS or full-stack opportunities? I'd love to hear from you.</p>
+        <div class="connect-links">
+          <a href="mailto:dhruvipatel2623@gmail.com">Email</a>
+          <a href="tel:+13464331526">Phone</a>
+          <a href="https://github.com/dhruvi-2623" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/dhruvipatel2623" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <p class="connect-location">Houston, Texas, United States</p>
+      </div>
+    </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <nav class="footer-nav">
+      <a href="mailto:dhruvipatel2623@gmail.com">Email</a>
+      <a href="tel:+13464331526">Phone</a>
+      <a href="https://github.com/dhruvi-2623" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/dhruvipatel2623" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+    <p class="footer-copy">© 2026 Dhruviben Patel</p>
+  </footer>
+
+  <script>
+    (function() {
+      const main = document.getElementById('main');
+      const views = document.querySelectorAll('.view');
+      const navLinks = document.querySelectorAll('.site-nav a[data-route], .site-logo[data-route]');
+
+      function getRoute() {
+        const hash = (window.location.hash || '#home').slice(1).toLowerCase();
+        return hash || 'home';
+      }
+
+      function showView(route) {
+        const viewId = 'view-' + route;
+        const view = document.getElementById(viewId);
+        if (!view) return;
+        if (view.classList.contains('active')) return;
+
+        views.forEach(function(v) {
+          v.classList.remove('active');
+          if (v === view) v.classList.add('active');
+        });
+        navLinks.forEach(function(a) {
+          a.classList.toggle('active', a.getAttribute('data-route') === route);
+        });
+        if (main) main.scrollTop = 0;
+        const newHash = route === 'home' ? '' : route;
+        if (window.location.hash.slice(1) !== route) window.location.hash = newHash;
+      }
+
+      function handleNav(e) {
+        const link = e.target.closest('a[data-route]');
+        if (!link) return;
+        const route = link.getAttribute('data-route');
+        if (route) {
+          e.preventDefault();
+          showView(route);
+        }
+      }
+
+      document.querySelector('.site-header').addEventListener('click', handleNav);
+      window.addEventListener('hashchange', function() { showView(getRoute()); });
+      window.addEventListener('load', function() { showView(getRoute()); });
+    })();
+  </script>
+</body>
+</html>
