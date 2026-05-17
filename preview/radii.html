@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"/>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  body { padding: 22px 24px; background: var(--bg); font-family: var(--sans); color: var(--text); }
+  .row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; }
+  .item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .chip { background: var(--surface); border: 1px solid var(--border); width: 110px; height: 70px; box-shadow: var(--shadow); }
+  .name { font-weight: 600; font-size: 0.78rem; letter-spacing: 0.04em; }
+  .meta { font-family: ui-monospace, Menlo, monospace; font-size: 0.7rem; opacity: 0.6; }
+</style></head><body>
+<div class="row">
+  <div class="item"><div class="chip" style="border-radius:6px"></div><span class="name">--radius-sm</span><span class="meta">6px</span></div>
+  <div class="item"><div class="chip" style="border-radius:10px"></div><span class="name">--radius</span><span class="meta">10px</span></div>
+  <div class="item"><div class="chip" style="border-radius:16px"></div><span class="name">--radius-lg</span><span class="meta">16px</span></div>
+  <div class="item"><div class="chip" style="border-radius:999px"></div><span class="name">--radius-pill</span><span class="meta">999px</span></div>
+</div>
+</body></html>

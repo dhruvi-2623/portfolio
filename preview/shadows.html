@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"/>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  body { padding: 22px 24px; background: var(--bg); font-family: var(--sans); color: var(--text); }
+  .row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+  .item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .card { background: var(--surface); width: 150px; height: 70px; border-radius: 12px; border: 1px solid var(--border); }
+  .a { box-shadow: var(--shadow-xs); }
+  .b { box-shadow: var(--shadow); }
+  .c { box-shadow: var(--shadow-hover); }
+  .name { font-weight: 600; font-size: 0.78rem; letter-spacing: 0.04em; }
+  .meta { font-family: ui-monospace, Menlo, monospace; font-size: 0.7rem; opacity: 0.6; text-align: center; }
+</style></head><body>
+<div class="row">
+  <div class="item"><div class="card a"></div><span class="name">--shadow-xs</span><span class="meta">0 1 4 / 4% alpha</span></div>
+  <div class="item"><div class="card b"></div><span class="name">--shadow</span><span class="meta">0 2 12 / 6% alpha</span></div>
+  <div class="item"><div class="card c"></div><span class="name">--shadow-hover</span><span class="meta">0 8 28 / 10% alpha</span></div>
+</div>
+</body></html>

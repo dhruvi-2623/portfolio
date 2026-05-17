@@ -1,0 +1,173 @@
+/* ============================================================
+   DHRUVIBEN PATEL — PORTFOLIO DESIGN SYSTEM
+   Tokens for color + typography
+   Loaded by every UI kit screen and slide in this system.
+   ============================================================ */
+
+/* Fonts — loaded from Google Fonts to match the original site exactly.
+   If you need to ship offline, drop .ttf files in fonts/ and swap to @font-face. */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Instrument+Serif:ital@0;1&display=swap');
+
+:root {
+  /* ---------- Base Color Palette (warm, paper-like) ---------- */
+  --bg:           #faf7f4;  /* page background — warm off-white */
+  --bg-warm:      #fdf8f5;  /* slightly warmer surface tint */
+  --surface:      #ffffff;  /* card / panel background */
+  --text:         #1e1b18;  /* primary ink — warm near-black */
+  --text-muted:   #6b6560;  /* secondary text, captions, meta */
+
+  /* ---------- Accent Colors ---------- */
+  --accent:       #c45c4a;  /* terracotta — primary brand */
+  --accent-dark:  #a84a3a;  /* terracotta pressed/hover */
+  --accent-soft:  rgba(196, 92, 74, 0.14);
+  --accent-2:     #8b7355;  /* warm taupe — secondary brand */
+  --accent-2-soft:rgba(139, 115, 85, 0.12);
+  --gold:         #b8860b;  /* dark gold — tertiary highlight */
+  --gold-soft:    rgba(184, 134, 11, 0.12);
+  --gold-ink:     #8b6914;  /* readable gold text on gold-soft */
+
+  /* ---------- Borders & Lines ---------- */
+  --border:       #e8e2dc;  /* hairline border, dividers */
+
+  /* ---------- Typography ---------- */
+  --serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --sans:  'DM Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --mono:  ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* type scale (rem-based, fluid via clamp where it matters) */
+  --fs-display:   clamp(2.5rem, 7vw, 3.5rem);  /* hero h1 */
+  --fs-h1:        2rem;
+  --fs-h2:        1.85rem;
+  --fs-h3:        1.1rem;
+  --fs-h4:        0.95rem;
+  --fs-body:      1rem;
+  --fs-body-sm:   0.9rem;
+  --fs-caption:   0.85rem;
+  --fs-meta:      0.8rem;
+  --fs-eyebrow:   0.78rem;  /* uppercase section labels */
+  --fs-pill:      0.72rem;
+
+  --lh-display:   1.1;
+  --lh-tight:     1.3;
+  --lh-body:      1.6;
+  --lh-loose:     1.65;
+
+  --ls-tight:     -0.02em;  /* serif display */
+  --ls-normal:    0;
+  --ls-wide:      0.12em;   /* uppercase eyebrows */
+
+  --fw-regular:   400;
+  --fw-medium:    500;
+  --fw-semibold:  600;
+  --fw-bold:      700;
+
+  /* ---------- Radii ---------- */
+  --radius-sm:    6px;
+  --radius:       10px;
+  --radius-lg:    16px;
+  --radius-pill:  999px;
+
+  /* ---------- Shadows ---------- */
+  --shadow-xs:    0 1px 4px rgba(30, 27, 24, 0.04);
+  --shadow:       0 2px 12px rgba(30, 27, 24, 0.06);
+  --shadow-hover: 0 8px 28px rgba(30, 27, 24, 0.10);
+
+  /* ---------- Spacing scale ---------- */
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.25rem;
+  --sp-6:  1.5rem;
+  --sp-8:  2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-20: 5rem;
+
+  /* ---------- Motion ---------- */
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast:     0.15s;
+  --dur:          0.2s;
+  --dur-slow:     0.45s;
+
+  /* ---------- Layout ---------- */
+  --container:    900px;
+
+  /* ---------- Semantic gradients ---------- */
+  --grad-hero:    linear-gradient(165deg, var(--bg) 0%, var(--bg-warm) 50%, rgba(253, 248, 245, 0.6) 100%);
+  --grad-primary: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  --grad-text:    linear-gradient(135deg, var(--text) 0%, var(--accent-2) 100%);
+  --grad-connect: linear-gradient(145deg, var(--bg-warm) 0%, rgba(196, 92, 74, 0.06) 50%, var(--bg-warm) 100%);
+}
+
+/* ============================================================
+   Semantic element styles — drop colors_and_type.css into a page
+   and these defaults will style raw HTML to match the brand.
+   ============================================================ */
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 { color: var(--text); margin: 0 0 0.5em; }
+
+h1 {
+  font-family: var(--serif);
+  font-size: var(--fs-display);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-tight);
+}
+
+h2 {
+  font-family: var(--serif);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
+}
+
+h3 {
+  font-family: var(--sans);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+}
+
+h4 {
+  font-family: var(--sans);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+}
+
+p { margin: 0 0 1rem; line-height: var(--lh-body); }
+
+a { color: var(--accent); text-decoration: none; transition: color var(--dur); }
+a:hover { color: var(--accent-dark); text-decoration: underline; }
+
+small, .meta { font-size: var(--fs-meta); color: var(--text-muted); }
+
+code, kbd, samp {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-sm);
+}
+
+/* Utility eyebrow label used everywhere */
+.eyebrow {
+  font-size: var(--fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+  color: var(--accent);
+  font-weight: var(--fw-medium);
+}

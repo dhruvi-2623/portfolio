@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"/>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  body { padding: 18px 24px; background: var(--bg); }
+  .row { display: flex; gap: 14px; align-items: stretch; }
+  .swatch {
+    flex: 1; height: 110px; border-radius: 10px; padding: 10px 12px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    border: 1px solid var(--border); position: relative;
+    font-family: var(--sans); color: var(--text);
+  }
+  .swatch .name { font-weight: 600; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .swatch .hex  { font-family: ui-monospace, Menlo, monospace; font-size: 0.72rem; opacity: 0.7; }
+  .light { color: #f6f2ec; }
+  .light .hex { opacity: 0.85; }
+</style></head><body>
+<div class="row">
+  <div class="swatch light" style="background:#c45c4a"><span class="name">Accent</span><span class="hex">#C45C4A</span></div>
+  <div class="swatch light" style="background:#a84a3a"><span class="name">Accent dark</span><span class="hex">#A84A3A</span></div>
+  <div class="swatch light" style="background:#8b7355"><span class="name">Accent 2</span><span class="hex">#8B7355</span></div>
+  <div class="swatch light" style="background:#b8860b"><span class="name">Gold</span><span class="hex">#B8860B</span></div>
+</div>
+</body></html>
