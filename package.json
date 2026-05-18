@@ -2,9 +2,19 @@
   "name": "dhruviben-portfolio",
   "private": true,
   "version": "1.0.0",
-  "description": "Static portfolio site (React via CDN + Babel in browser)",
+  "type": "module",
   "scripts": {
-    "build": "node scripts/build.mjs"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.3"
   },
   "engines": {
     "node": ">=18"
