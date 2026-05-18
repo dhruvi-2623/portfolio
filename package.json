@@ -1,0 +1,12 @@
+{
+  "name": "dhruviben-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static portfolio site (React via CDN + Babel in browser)",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
