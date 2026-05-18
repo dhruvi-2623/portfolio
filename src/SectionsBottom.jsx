@@ -104,22 +104,17 @@ const PROJECTS = [
     cat: 'Personal',
     name: 'Service Broker System',
     href: 'https://github.com/dhruvi-2623/service-broker-system',
-    placeholders: true,
-    placeholderLabels: ['Registry', 'API Layer', 'Admin UI'],
-    about: {
-      title: 'Service Broker System',
-      period: 'Personal Project',
-      summary:
-        'A service registry that brokers requests between client apps and back-end services. Built with a React 19 admin dashboard and a Node + Express backend, persisted to SQLite for local development and MySQL for production.',
-      points: [
-        'Service registry with health tracking and per-instance status history',
-        'Password hashing service using bcrypt + bcryptjs for credential security',
-        'Random-token service for short-lived API keys and verification codes',
-        'Email notifications through Nodemailer when service state changes',
-        'Admin dashboard with React Router 7 routing and Axios-driven views',
-      ],
-      stack: ['React 19', 'Express', 'SQLite', 'MySQL', 'bcrypt', 'Nodemailer', 'Axios'],
-    },
+    // No screenshots — render a content-only card with description + features.
+    summary:
+      'A service registry that brokers requests between client apps and back-end services. Built with a React 19 admin dashboard and a Node + Express backend, persisted to SQLite for local development and MySQL for production.',
+    features: [
+      'Service registry with health tracking and per-instance status history',
+      'Password hashing service using bcrypt + bcryptjs for credential security',
+      'Random-token service for short-lived API keys and verification codes',
+      'Email notifications through Nodemailer when service state changes',
+      'Admin dashboard with React Router 7 routing and Axios-driven views',
+    ],
+    stack: ['React 19', 'Express', 'SQLite', 'MySQL', 'bcrypt', 'Nodemailer', 'Axios'],
   },
   {
     n: '04',
@@ -133,46 +128,6 @@ const PROJECTS = [
     ],
   },
 ];
-
-// ============================================================
-// PROJECT IMAGE GRID (3-up layout — matches all screenshot cards)
-// ============================================================
-function ProjectImageGrid({ project }) {
-  const slots = [
-    { className: 'top', index: 0 },
-    { className: 'bot', index: 1 },
-    { className: 'tall', index: 2 },
-  ];
-
-  const renderSlot = ({ className, index }) => {
-    const label = project.placeholderLabels?.[index] ?? '';
-    const imgClass = `project-img ${className}${project.placeholders ? ' project-img--placeholder' : ''}`;
-
-    if (project.placeholders) {
-      return (
-        <div className={imgClass} key={className}>
-          <span>{label}</span>
-        </div>
-      );
-    }
-
-    return (
-      <div className={imgClass} key={className}>
-        <img src={project.images[index]} alt="" loading="lazy" />
-      </div>
-    );
-  };
-
-  return (
-    <div className="project-grid">
-      <div className="project-col-1">
-        {renderSlot(slots[0])}
-        {renderSlot(slots[1])}
-      </div>
-      {renderSlot(slots[2])}
-    </div>
-  );
-}
 
 // ============================================================
 // ABOUT PROJECT MODAL
@@ -250,20 +205,23 @@ function ProjectCard({ project, index, total }) {
     };
   }, [index, total]);
 
-  const stickyTop = `calc(6rem + ${index * 28}px)`;
+  const stickyTop = `calc(6rem + ${index * 52}px)`;
 
   // Layout decision:
-  //   - placeholders or images → 2-stacked + 1-tall grid (default)
-  //   - 4+ images              → 2 x 2 grid
+  //   - features (no images) → content card with summary + bullets + tech stack
+  //   - 4+ images           → 2 x 2 grid
+  //   - otherwise           → 2-stacked + 1-tall (default)
   const hasImages = Array.isArray(project.images) && project.images.length > 0;
-  const useGrid = hasImages || project.placeholders;
   const isFour = hasImages && project.images.length >= 4;
 
   return (
     <>
       {modalOpen && <AboutModal project={project} onClose={() => setModalOpen(false)} />}
       <div className="project-slot" ref={slotRef} style={{ top: stickyTop }}>
-        <div className="project-card" ref={cardRef}>
+        <div
+          className={`project-card${!hasImages ? " project-card--content" : ""}`}
+          ref={cardRef}
+        >
           <div className="project-head">
             <div className="project-num">{project.n}</div>
             <div className="project-info">
@@ -277,7 +235,7 @@ function ProjectCard({ project, index, total }) {
             )}
           </div>
 
-          {!useGrid ? (
+          {!hasImages ? (
             <div className="project-content">
               <p className="project-summary">{project.summary}</p>
               <ul className="project-features">
@@ -285,7 +243,7 @@ function ProjectCard({ project, index, total }) {
                   <li key={i}>{f}</li>
                 ))}
               </ul>
-              <div className="project-stack">
+              <div className="project-chips">
                 {project.stack.map((s) => (
                   <span key={s} className="project-chip">{s}</span>
                 ))}
@@ -303,7 +261,13 @@ function ProjectCard({ project, index, total }) {
               </div>
             </div>
           ) : (
-            <ProjectImageGrid project={project} />
+            <div className="project-grid">
+              <div className="project-col-1">
+                <div className="project-img top"><img src={project.images[0]} alt="" loading="lazy" /></div>
+                <div className="project-img bot"><img src={project.images[1]} alt="" loading="lazy" /></div>
+              </div>
+              <div className="project-img tall"><img src={project.images[2]} alt="" loading="lazy" /></div>
+            </div>
           )}
         </div>
       </div>
@@ -316,7 +280,7 @@ function Projects() {
   return (
     <section className="projects" id="projects">
       <h2 className="hero-heading">Project</h2>
-      <div className="project-stack">
+      <div className="projects-list">
         {PROJECTS.map((p, i) => (
           <ProjectCard key={p.n} project={p} index={i} total={PROJECTS.length} />
         ))}

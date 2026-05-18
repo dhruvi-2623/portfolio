@@ -12,6 +12,11 @@
   --fg-muted: rgba(215, 226, 234, 0.6);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --btn-grad: linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%);
+  /* Matches 3-image project grid body (stacked + tall column) */
+  --project-body-min-h: max(
+    clamp(290px, 38vw, 570px),
+    calc(clamp(130px, 16vw, 230px) + clamp(160px, 22vw, 340px) + 0.75rem)
+  );
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,8 +40,8 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   height: 100vh;
   min-height: 720px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
   overflow-x: clip;
 }
 
@@ -44,7 +49,6 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-shrink: 0;
   padding: 1.5rem 1.5rem 0;
   position: relative;
   z-index: 20;
@@ -86,12 +90,12 @@ a { color: inherit; text-decoration: none; }
 .hero-heading-wrap {
   overflow: hidden;
   width: 100%;
-  flex: 1 1 auto;
-  min-height: 0;
+  margin-top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: 1rem 0;
 }
 
 .hero h1 {
@@ -136,15 +140,16 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  flex-shrink: 0;
-  padding: 0 1.5rem 1.75rem;
+  padding: 1.25rem 1.5rem 1.75rem;
   position: relative;
   z-index: 20;
-  gap: 1rem;
+  gap: 1.5rem;
+  margin-top: 0;
 }
 @media (min-width: 768px) {
   .hero-bottom {
-    padding: 0 2.5rem 2.5rem;
+    padding: 2rem 2.5rem 2.5rem;
+    gap: 2rem;
   }
 }
 
@@ -523,6 +528,7 @@ a { color: inherit; text-decoration: none; }
   z-index: 10;
   padding: 5rem 1.25rem 8rem;
   color: var(--fg);
+  isolation: isolate;
 }
 @media (min-width: 640px) {
   .projects { border-top-left-radius: 50px; border-top-right-radius: 50px; margin-top: -3rem; padding: 6rem 2rem 10rem; }
@@ -542,7 +548,7 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -0.01em;
 }
 
-.project-stack {
+.projects-list {
   max-width: 1280px;
   margin: 0 auto;
   position: relative;
@@ -552,8 +558,19 @@ a { color: inherit; text-decoration: none; }
   position: sticky;
   height: 85vh;
   padding-top: 6rem;
+  padding-bottom: 2rem;
 }
-@media (min-width: 768px) { .project-slot { padding-top: 8rem; } }
+@media (min-width: 768px) {
+  .project-slot {
+    padding-top: 8rem;
+    padding-bottom: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .projects-list .project-slot:last-child {
+    margin-bottom: 3rem;
+    padding-bottom: 4rem;
+  }
+}
 
 .project-card {
   background: #0C0C0C;
@@ -562,6 +579,7 @@ a { color: inherit; text-decoration: none; }
   padding: 1rem;
   transform-origin: top center;
   transition: transform 0.3s var(--ease-out);
+  overflow: hidden;
 }
 @media (min-width: 640px) { .project-card { border-radius: 50px; padding: 1.5rem; } }
 @media (min-width: 768px) { .project-card { border-radius: 60px; padding: 2rem; } }
@@ -607,8 +625,14 @@ a { color: inherit; text-decoration: none; }
   display: grid;
   grid-template-columns: 40% 60%;
   gap: 0.75rem;
+  min-height: var(--project-body-min-h);
 }
 @media (min-width: 768px) { .project-grid { gap: 1rem; } }
+
+.project-card--content {
+  display: flex;
+  flex-direction: column;
+}
 
 .project-col-1 { display: flex; flex-direction: column; gap: 0.75rem; }
 @media (min-width: 768px) { .project-col-1 { gap: 1rem; } }
@@ -626,28 +650,6 @@ a { color: inherit; text-decoration: none; }
 .project-img.half { height: clamp(150px, 19vw, 280px); }
 .project-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.project-img--placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(
-    160deg,
-    rgba(215, 226, 234, 0.05) 0%,
-    rgba(118, 33, 176, 0.16) 48%,
-    rgba(190, 76, 0, 0.08) 100%
-  );
-  border: 1px dashed rgba(215, 226, 234, 0.2);
-}
-.project-img--placeholder span {
-  font-size: clamp(0.65rem, 1.2vw, 0.85rem);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--fg-muted);
-  font-weight: 500;
-  text-align: center;
-  padding: 0 1rem;
-}
-
 /* 4-image grid (2 x 2) for projects with 4 screenshots */
 .project-grid--quad {
   grid-template-columns: 1fr 1fr;
@@ -661,12 +663,21 @@ a { color: inherit; text-decoration: none; }
   .project-grid--quad .project-col { gap: 1rem; }
 }
 
-/* Content-only card (no screenshots) */
+/* Content-only card (no screenshots) — same height + radius as image cards */
 .project-content {
   padding: 0.5rem 1rem 1rem;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 1.25rem;
   color: var(--fg);
+  border-radius: inherit;
+  min-height: var(--project-body-min-h);
+  flex: 1;
+}
+
+.project-content .project-chips {
+  margin-top: auto;
+  padding-top: 0.5rem;
 }
 @media (min-width: 640px) {
   .project-content { padding: 1rem 2rem 2rem; gap: 1.5rem; }
@@ -716,7 +727,7 @@ a { color: inherit; text-decoration: none; }
   opacity: 0.6;
 }
 
-.project-stack {
+.project-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 0.75rem;
@@ -958,7 +969,6 @@ button.ghost-btn {
 
 /* —— Mobile (landscape phones + portrait) —— */
 @media (max-width: 767px) {
-  /* One screen = hero only; About starts on scroll */
   .hero {
     height: 100svh;
     height: 100dvh;
@@ -972,10 +982,10 @@ button.ghost-btn {
   .hero-heading-wrap {
     align-items: center;
     justify-content: center;
+    padding: 0.5rem 0;
   }
 
   .navbar {
-    flex-shrink: 0;
     flex-wrap: wrap;
     align-items: flex-start;
     row-gap: 0.75rem;
@@ -1036,8 +1046,8 @@ button.ghost-btn {
   .about {
     min-height: 100svh;
     min-height: 100dvh;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
     scroll-margin-top: 0;
   }
 
@@ -1059,15 +1069,30 @@ button.ghost-btn {
     height: auto;
     min-height: 0;
     padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .projects-list .project-slot:last-child {
+    margin-bottom: 3rem;
   }
 
   .project-card {
     transform: none !important;
   }
 
+  :root {
+    --project-body-min-h: clamp(420px, calc(42vw * 3 + 2rem), 760px);
+  }
+
   .project-grid {
     grid-template-columns: 1fr;
     gap: 0.65rem;
+    min-height: var(--project-body-min-h);
+  }
+
+  .project-content {
+    min-height: var(--project-body-min-h);
   }
 
   .project-col-1 {
@@ -1128,31 +1153,13 @@ button.ghost-btn {
   }
 }
 
-/* Short mobile screens — keep hero content inside one viewport */
-@media (max-width: 767px) and (max-height: 700px) {
-  .hero h1 {
-    font-size: clamp(1.85rem, 9vw, 2.35rem);
-  }
-
-  .hero-bottom {
-    padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
-  }
-
-  .navbar {
-    padding-top: max(0.65rem, env(safe-area-inset-top, 0px));
-    row-gap: 0.5rem;
-  }
-}
-
 /* —— Small phones —— */
 @media (max-width: 479px) {
   .hero {
     height: 100svh;
     height: 100dvh;
     min-height: 100svh;
-    min-height: 100dvh;
     max-height: 100svh;
-    max-height: 100dvh;
   }
 
   .navbar-brand {
@@ -1164,6 +1171,15 @@ button.ghost-btn {
 
   .navbar nav a {
     font-size: 0.62rem;
+  }
+
+  .hero-heading-wrap {
+    padding: 0.25rem 0;
+  }
+
+  .hero-bottom {
+    padding-top: 1rem;
+    gap: 1.25rem;
   }
 
   .hero h1 {
@@ -1262,12 +1278,18 @@ button.ghost-btn {
     max-width: 72rem;
   }
 
-  .project-stack {
+  .projects-list {
     max-width: 1400px;
   }
 
   .about-text {
     max-width: 42rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero h1 {
+    white-space: nowrap;
   }
 }
 
