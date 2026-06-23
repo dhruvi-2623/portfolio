@@ -593,7 +593,7 @@ a { color: inherit; text-decoration: none; }
 }
 @media (max-width: 767px) {
   .project-head { grid-template-columns: auto 1fr; }
-  .project-head .ghost-btn { grid-column: 1 / -1; justify-self: start; }
+  .project-head .project-btns { grid-column: 1 / -1; justify-self: start; }
 }
 
 .project-num {
@@ -1196,7 +1196,6 @@ button.ghost-btn {
   }
 
   .contact-btn {
-    align-self: flex-start;
     padding: 0.7rem 1.5rem;
     font-size: 0.7rem;
   }
@@ -1302,5 +1301,242 @@ button.ghost-btn {
   .navbar-brand {
     font-size: 1.5rem;
   }
+}
+
+/* ==================== NAV RÉSUMÉ BUTTON ==================== */
+.nav-resume-btn {
+  padding: 0.38rem 0.9rem !important;
+  font-size: 0.65rem !important;
+  outline-offset: -2px;
+  line-height: 1.4;
+}
+@media (min-width: 640px) {
+  .nav-resume-btn { padding: 0.45rem 1.1rem !important; font-size: 0.72rem !important; }
+}
+@media (min-width: 768px) {
+  .nav-resume-btn { padding: 0.5rem 1.25rem !important; font-size: 0.78rem !important; }
+}
+
+/* ==================== HERO LOCATION + CTAs ==================== */
+.hero-location {
+  color: #B600A8;
+  font-size: clamp(0.58rem, 0.95vw, 0.76rem);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  margin-top: 0.3rem;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+@media (max-width: 479px) {
+  .hero-ctas {
+    align-items: stretch;
+    width: 100%;
+  }
+  .hero-ctas .ghost-btn,
+  .hero-ctas .contact-btn {
+    text-align: center;
+    align-self: stretch;
+  }
+}
+
+/* ==================== PROJECT BUTTONS ==================== */
+.project-btns {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* ==================== PROJECT + SERVICE BADGES ==================== */
+.project-badge,
+.service-badge {
+  display: inline-block;
+  padding: 0.18rem 0.6rem;
+  background: rgba(182, 0, 168, 0.14);
+  border: 1px solid rgba(182, 0, 168, 0.35);
+  color: #B600A8;
+  border-radius: 999px;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  margin-left: 0.55rem;
+  vertical-align: middle;
+}
+
+/* ==================== LEARNING & EXPLORING ==================== */
+.learning-section {
+  max-width: 64rem;
+  margin: 2.5rem auto 0;
+  border-top: 1px solid rgba(12, 12, 12, 0.12);
+  padding-top: 1.75rem;
+}
+@media (min-width: 1280px) { .learning-section { max-width: 72rem; } }
+
+.learning-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(12, 12, 12, 0.4);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.learning-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.learning-chip {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid rgba(12, 12, 12, 0.18);
+  color: rgba(12, 12, 12, 0.45);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+/* ==================== ARCHITECTURE DIAGRAM ==================== */
+.arch-diagram {
+  margin: 1.25rem 0 1.75rem;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(215, 226, 234, 0.03);
+  border: 1px solid rgba(215, 226, 234, 0.1);
+  padding: 0.75rem;
+}
+.arch-diagram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==================== MODAL LINKS (live demo + view code) ==================== */
+.about-modal-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(215, 226, 234, 0.1);
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+}
+.about-modal-links .ghost-btn {
+  border-color: rgba(215, 226, 234, 0.5);
+  color: var(--fg);
+}
+.about-modal-links .ghost-btn:hover { background: rgba(215, 226, 234, 0.08); }
+
+/* ==================== CONTACT SECTION ==================== */
+.contact-section {
+  background: #0C0C0C;
+  padding: 5rem 1.25rem 6rem;
+  color: var(--fg);
+  text-align: center;
+  border-top: 1px solid rgba(215, 226, 234, 0.07);
+}
+@media (min-width: 640px) { .contact-section { padding: 6rem 2rem 7rem; } }
+@media (min-width: 768px) { .contact-section { padding: 7rem 2.5rem 8rem; } }
+
+.contact-heading {
+  margin-bottom: 3rem !important;
+}
+@media (min-width: 768px) { .contact-heading { margin-bottom: 4rem !important; } }
+
+.contact-wrap {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.contact-form {
+  display: grid;
+  gap: 0.875rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.contact-input {
+  width: 100%;
+  background: rgba(215, 226, 234, 0.06);
+  border: 1px solid rgba(215, 226, 234, 0.18);
+  color: var(--fg);
+  font-family: 'Kanit', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 0.875rem 1.25rem;
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.contact-input:focus { border-color: #B600A8; }
+.contact-input::placeholder { color: var(--fg-muted); }
+
+.contact-textarea {
+  resize: vertical;
+  min-height: 130px;
+  font-family: 'Kanit', sans-serif;
+}
+
+.contact-submit {
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+}
+
+.contact-links-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(215, 226, 234, 0.1);
+}
+
+.contact-link {
+  color: var(--fg-muted);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+.contact-link:hover { color: var(--fg); }
+
+/* ==================== ACCESSIBILITY ==================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Visible focus ring for keyboard nav */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #B600A8;
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 

@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import { Hero, About } from "./SectionsTop.jsx";
 import { Experience } from "./SectionsExperience.jsx";
-import { Services, Projects, Footer } from "./SectionsBottom.jsx";
+import { Services, Projects, Contact, Footer } from "./SectionsBottom.jsx";
 import "./styles.css";
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
       <Experience />
       <Services />
       <Projects />
+      <Contact />
       <Footer />
     </>
   );

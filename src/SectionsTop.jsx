@@ -1,6 +1,5 @@
-// Hero, Marquee, About — content from Dhruviben Patel's GitHub repo
 import { useEffect, useRef } from "react";
-import { FadeIn, ContactButton, AnimatedText } from "./Components.jsx";
+import { FadeIn, AnimatedText } from "./Components.jsx";
 
 // ============================================================
 // HERO
@@ -15,9 +14,10 @@ function Hero() {
           <a href="#services">Skills</a>
           <a href="#experience">Experience</a>
           <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
           <a href="https://github.com/dhruvi-2623" target="_blank" rel="noopener">GitHub</a>
           <a href="https://www.linkedin.com/in/dhruvipatel2623" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="mailto:dhruvipatel2623@gmail.com">Contact</a>
+          <a href="/resume.pdf" download className="contact-btn nav-resume-btn">Résumé</a>
         </nav>
       </FadeIn>
 
@@ -26,11 +26,14 @@ function Hero() {
       </FadeIn>
 
       <div className="hero-bottom">
-        <FadeIn as="p" className="hero-tagline" y={20} delay={0.35}>
-          a software engineer driven by shipping full-stack web apps that work in the real world
+        <FadeIn as="div" className="hero-tagline-wrap" y={20} delay={0.35}>
+          <p className="hero-tagline">Full-Stack Software Engineer</p>
+          <p className="hero-location">Houston, TX &middot; Open to full-time SWE roles</p>
         </FadeIn>
-        <FadeIn y={20} delay={0.5}>
-          <ContactButton />
+        <FadeIn as="div" className="hero-ctas" y={20} delay={0.5}>
+          <a href="#projects" className="ghost-btn">View Work</a>
+          <a href="/resume.pdf" download className="ghost-btn">Download Résumé</a>
+          <a href="#contact" className="contact-btn">Contact</a>
         </FadeIn>
       </div>
     </section>
@@ -38,30 +41,22 @@ function Hero() {
 }
 
 // ============================================================
-// MARQUEE — the original motionsites.ai preview GIFs
+// MARQUEE — Dhruvi's own project screenshots
 // ============================================================
 const MARQUEE_IMAGES = [
-  'https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif',
-  'https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif',
-  'https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif',
-  'https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif',
-  'https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif',
-  'https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif',
-  'https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif',
-  'https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif',
-  'https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif',
-  'https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif',
-  'https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif',
-  'https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif',
-  'https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif',
-  'https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif',
-  'https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif',
-  'https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif',
-  'https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif',
-  'https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif',
-  'https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif',
-  'https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif',
-  'https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif',
+  'assets/chat-1-login.png',
+  'assets/chat-2-contacts.png',
+  'assets/chat-3-profile.png',
+  'assets/healthcare-1-welcome.png',
+  'assets/healthcare-2-telehealth.png',
+  'assets/healthcare-3-corporate.png',
+  'assets/healthcare-4-intake.png',
+  'assets/foody-1-burger.png',
+  'assets/foody-2-cart.png',
+  'assets/foody-3-catering.png',
+  'assets/exp-bigblue-illustration.jpeg',
+  'assets/exp-biztech-illustration.jpeg',
+  'assets/exp-elsner-illustration.jpeg',
 ];
 
 function Marquee() {
@@ -87,12 +82,12 @@ function Marquee() {
     };
   }, []);
 
-  const first = MARQUEE_IMAGES.slice(0, 11);
-  const second = MARQUEE_IMAGES.slice(11);
+  const first = MARQUEE_IMAGES.slice(0, 7);
+  const second = MARQUEE_IMAGES.slice(7);
   const triple = (arr) => [...arr, ...arr, ...arr];
 
   return (
-    <section className="marquee" ref={sectionRef}>
+    <section className="marquee" ref={sectionRef} aria-hidden="true">
       <div className="marquee-row" ref={row1}>
         {triple(first).map((src, i) => (
           <div className="marquee-tile" key={`r1-${i}`}>
@@ -112,10 +107,10 @@ function Marquee() {
 }
 
 // ============================================================
-// ABOUT — content from Dhruviben's GitHub repo
+// ABOUT
 // ============================================================
 function About() {
-  const text = "I'm a software engineer focused on building full-stack web products with React, Node.js, ASP.NET Core, MongoDB, SQL, and Azure. I take end-to-end ownership from idea to production. Let's build something incredible together!";
+  const text = "I build full-stack web products with React, TypeScript, Node.js, ASP.NET Core, MongoDB, and SQL Server. I take end-to-end ownership — from system design through production delivery. Currently integrating LLM tool-use via the Model Context Protocol into real shipped apps.";
 
   return (
     <section className="about" id="about">
@@ -123,24 +118,28 @@ function About() {
         <img
           src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png"
           alt=""
+          loading="lazy"
         />
       </FadeIn>
       <FadeIn as="div" className="about-corner tr" x={80} delay={0.15}>
         <img
           src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png"
           alt=""
+          loading="lazy"
         />
       </FadeIn>
       <FadeIn as="div" className="about-corner bl" x={-80} delay={0.25}>
         <img
           src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png"
           alt=""
+          loading="lazy"
         />
       </FadeIn>
       <FadeIn as="div" className="about-corner br" x={80} delay={0.3}>
         <img
           src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png"
           alt=""
+          loading="lazy"
         />
       </FadeIn>
 
@@ -151,7 +150,7 @@ function About() {
       <AnimatedText text={text} />
 
       <FadeIn y={20} delay={0.1}>
-        <ContactButton />
+        <a href="#contact" className="contact-btn">Get In Touch</a>
       </FadeIn>
     </section>
   );
