@@ -9,7 +9,7 @@ const EDUCATION = [
     school: 'University of Houston – Clear Lake',
     location: 'Houston, TX',
     period: 'Aug 2024 — May 2026',
-    gpa: 'GPA: 3.7 / 4.0',
+    gpa: 'GPA: 3.35 / 4.0',
   },
   {
     n: '02',
@@ -17,7 +17,7 @@ const EDUCATION = [
     school: 'Silver Oak University',
     location: 'Gujarat, India',
     period: 'Aug 2020 — May 2024',
-    gpa: 'GPA: 3.9 / 4.0',
+    gpa: 'GPA: 3.84 / 4.0',
   },
 ];
 
@@ -43,7 +43,7 @@ function EducationCard({ edu, index }) {
 function Education() {
   return (
     <section className="education" id="education">
-      <FadeIn as="h2" className="hero-heading" y={40} delay={0}>Education</FadeIn>
+      <FadeIn as="h2" y={30} delay={0}>Education</FadeIn>
       <div className="edu-list">
         {EDUCATION.map((edu, i) => (
           <EducationCard edu={edu} index={i} key={edu.n} />
