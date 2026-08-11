@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { FadeIn, GhostButton } from "./Components.jsx";
+import { FadeIn, GhostButton, usePrefersReducedMotion } from "./Components.jsx";
 
 // ============================================================
 // SKILLS — 5 confirmed skill groups + Learning subsection
@@ -206,6 +206,52 @@ function HealthcareArchDiagram() {
 }
 
 // ============================================================
+// CERTIFICATIONS
+// ============================================================
+const CERTIFICATIONS = [
+  {
+    n: '01',
+    name: 'Model Context Protocol (MCP) Certification',
+    issuer: 'Anthropic Academy',
+    credentialUrl: 'https://verify.skilljar.com/c/xckta4mm95tr',
+  },
+];
+
+function CertificationCard({ cert }) {
+  return (
+    <FadeIn as="article" className="cert-card" y={30} delay={0.05}>
+      <div className="cert-num">{cert.n}</div>
+      <div className="cert-body">
+        <p className="cert-issuer">{cert.issuer}</p>
+        <h3 className="cert-name">{cert.name}</h3>
+      </div>
+      {cert.credentialUrl && (
+        <GhostButton
+          href={cert.credentialUrl}
+          label="View Credential"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cert-btn"
+        />
+      )}
+    </FadeIn>
+  );
+}
+
+function Certifications() {
+  return (
+    <section className="certifications" id="certifications">
+      <FadeIn as="h2" y={40} delay={0}>Certifications</FadeIn>
+      <div className="cert-list">
+        {CERTIFICATIONS.map((c) => (
+          <CertificationCard cert={c} key={c.n} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
 // PROJECTS
 // ============================================================
 const PROJECTS = [
@@ -385,12 +431,13 @@ function ProjectCard({ project, index, total }) {
   const cardRef = useRef(null);
   const slotRef = useRef(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const targetScale = 1 - (total - 1 - index) * 0.03;
     const card = cardRef.current;
     const slot = slotRef.current;
-    if (!card || !slot) return;
+    if (!card || !slot || reducedMotion) return;
 
     const onScroll = () => {
       const rect = slot.getBoundingClientRect();
@@ -409,7 +456,7 @@ function ProjectCard({ project, index, total }) {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, [index, total]);
+  }, [index, total, reducedMotion]);
 
   const stickyTop = `calc(6rem + ${index * 52}px)`;
   const hasImages = Array.isArray(project.images) && project.images.length > 0;
@@ -505,9 +552,66 @@ function Projects() {
 }
 
 // ============================================================
+// TESTIMONIALS / RECOMMENDATIONS
+// ------------------------------------------------------------
+// Empty until quotes are added. To publish a testimonial, add an
+// entry here — { quote, name, title, company, avatar? } — and the
+// section renders automatically. Left empty, the section renders
+// nothing so an empty block never ships to the live site.
+// ============================================================
+const TESTIMONIALS = [
+  // {
+  //   quote: 'Dhruvi shipped faster than anyone on the team and always understood the "why" behind a feature.',
+  //   name: 'Jane Doe',
+  //   title: 'Engineering Manager',
+  //   company: 'Bigblue Technologies',
+  // },
+];
+
+function Testimonials() {
+  if (TESTIMONIALS.length === 0) return null;
+
+  return (
+    <section className="testimonials" id="testimonials">
+      <FadeIn as="h2" y={40} delay={0}>Recommendations</FadeIn>
+      <div className="testimonial-list">
+        {TESTIMONIALS.map((t, i) => (
+          <FadeIn as="figure" className="testimonial-card" y={30} delay={i * 0.1} key={t.name}>
+            <blockquote className="testimonial-quote">&ldquo;{t.quote}&rdquo;</blockquote>
+            <figcaption className="testimonial-attribution">
+              <span className="testimonial-name">{t.name}</span>
+              <span className="testimonial-role">
+                {t.title}
+                {t.company && ` · ${t.company}`}
+              </span>
+            </figcaption>
+          </FadeIn>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
 // CONTACT
 // ============================================================
+const CONTACT_EMAIL = 'dhruvipatel2623@gmail.com';
+
 function Contact() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    const subject = `Portfolio message from ${name || 'website visitor'}`;
+    const body = `${message}\n\n— ${name}${email ? ` (${email})` : ''}`;
+    const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailto;
+  };
+
   return (
     <section className="contact-section" id="contact">
       <FadeIn as="h2" className="hero-heading contact-heading" y={40} delay={0}>
@@ -515,12 +619,7 @@ function Contact() {
       </FadeIn>
 
       <FadeIn as="div" className="contact-wrap" y={30} delay={0.1}>
-        {/* Replace YOUR_FORM_KEY with your Formspree form ID after signing up at formspree.io */}
-        <form
-          className="contact-form"
-          action="https://formspree.io/f/YOUR_FORM_KEY"
-          method="POST"
-        >
+        <form className="contact-form" onSubmit={handleSubmit}>
           <label className="sr-only" htmlFor="contact-name">Name</label>
           <input
             id="contact-name"
@@ -552,6 +651,7 @@ function Contact() {
           <button type="submit" className="contact-btn contact-submit">
             Send Message
           </button>
+          <p className="contact-hint">Opens your email app, addressed to me — nothing is sent from this page.</p>
         </form>
 
         <div className="contact-links-row">
@@ -589,4 +689,4 @@ function Footer() {
   );
 }
 
-export { Services, Projects, Contact, Footer };
+export { Services, Certifications, Projects, Testimonials, Contact, Footer };

@@ -5,17 +5,16 @@ import { FadeIn } from "./Components.jsx";
 const EXPERIENCES = [
   {
     n: '01',
-    role: 'iOS & Web Developer',
+    role: 'Software Engineer Intern',
     company: 'Bigblue Technologies',
     href: 'https://thebigblue.app/',
     hrefLabel: 'thebigblue.app',
-    period: 'Jan 2026 — Current',
+    period: 'Jan 2026 — May 2026',
     location: 'Remote · Costa Mesa, California',
     points: [
-      'Built and shipped 5,000+ lines of production-ready marketing landing pages — live now at thebigblue.app — aligned to UI developer and founder requirements.',
-      'Fixed production iOS bugs in Xcode, with technical-founder code review on every change (~1,000 lines reviewed).',
-      'Collaborated with the UI designer, senior engineer, and CEO on marketing pages, demoed builds to the full team, and tested the MVP end-to-end.',
-      'Met weekly with the technical founder and CEO to plan the next week\u2019s targets and ship status updates.',
+      'Stabilized the flagship SwiftUI iOS app ahead of its early-access launch, clearing production-blocking bugs so its first ~200 early adopters landed on a reliable experience.',
+      'Stood up the product’s first QA and unit-test coverage, catching regressions before release and shipping three consecutive release cycles with zero post-launch regressions.',
+      'Rebuilt the company marketing site (thebigblue.app), lifting its Lighthouse score from 60 to 95 and improving Core Web Vitals and SEO health.',
     ],
     image: 'assets/exp-bigblue-illustration.jpeg',
   },

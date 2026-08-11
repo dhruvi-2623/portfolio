@@ -9,6 +9,25 @@
 
 import { useEffect, useRef, useState, useLayoutEffect, useMemo } from "react";
 
+// ---- usePrefersReducedMotion -----------------------------------------------
+function usePrefersReducedMotion() {
+  const getMatch = () =>
+    typeof window !== 'undefined' && window.matchMedia
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false;
+  const [reduced, setReduced] = useState(getMatch);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onChange = () => setReduced(mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  return reduced;
+}
+
 // ---- FadeIn ----------------------------------------------------------------
 function FadeIn({ as = 'div', children, delay = 0, y = 30, x = 0, className = '', style, ...rest }) {
   const ref = useRef(null);
@@ -55,11 +74,12 @@ function Magnet({ children, padding = 150, strength = 3, className = '', style }
   const ref = useRef(null);
   const inner = useRef(null);
   const [active, setActive] = useState(false);
+  const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const el = ref.current;
     const child = inner.current;
-    if (!el || !child) return;
+    if (!el || !child || reducedMotion) return;
 
     const onMove = (e) => {
       const rect = el.getBoundingClientRect();
@@ -91,7 +111,7 @@ function Magnet({ children, padding = 150, strength = 3, className = '', style }
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseleave', onLeave);
     };
-  }, [padding, strength, active]);
+  }, [padding, strength, active, reducedMotion]);
 
   return (
     <div ref={ref} className={className} style={style}>
@@ -132,10 +152,11 @@ function AnimatedText({ text = '', className = '' }) {
   const ref = useRef(null);
   const chars = useMemo(() => String(text).split(''), [text]);
   const charRefs = useRef([]);
+  const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || reducedMotion) return;
 
     const onScroll = () => {
       const rect = el.getBoundingClientRect();
@@ -159,7 +180,7 @@ function AnimatedText({ text = '', className = '' }) {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, [chars]);
+  }, [chars, reducedMotion]);
 
   return (
     <p ref={ref} className={`about-text ${className}`}>
@@ -167,7 +188,7 @@ function AnimatedText({ text = '', className = '' }) {
         <span
           key={i}
           ref={(n) => (charRefs.current[i] = n)}
-          className="char"
+          className={`char${reducedMotion ? ' lit' : ''}`}
         >
           {ch === ' ' ? '\u00A0' : ch}
         </span>
@@ -176,4 +197,4 @@ function AnimatedText({ text = '', className = '' }) {
   );
 }
 
-export { FadeIn, Magnet, ContactButton, GhostButton, AnimatedText };
+export { FadeIn, Magnet, ContactButton, GhostButton, AnimatedText, usePrefersReducedMotion };
