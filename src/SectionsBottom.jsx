@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { FadeIn, GhostButton, usePrefersReducedMotion } from "./Components.jsx";
+import { useEffect, useState } from "react";
+import { FadeIn, GhostButton } from "./Components.jsx";
 
 // ============================================================
 // SKILLS — 5 confirmed skill groups + Learning subsection
@@ -43,22 +43,20 @@ const LEARNING = [
 function Services() {
   return (
     <section className="services" id="services">
-      <FadeIn as="h2" y={40} delay={0}>Skills</FadeIn>
-      <div className="service-list">
+      <FadeIn as="h2" y={30} delay={0}>Skills</FadeIn>
+      <div className="service-grid">
         {SERVICES.map((s, i) => (
-          <FadeIn as="div" className="service-item" key={s.n} y={30} delay={i * 0.1}>
-            <div className="service-num">{s.n}</div>
-            <div>
-              <h3 className="service-name">
-                {s.name}
-                {s.badge && <span className="service-badge">{s.badge}</span>}
-              </h3>
-              <p className="service-desc">{s.desc}</p>
-            </div>
+          <FadeIn as="div" className="service-card" key={s.n} y={20} delay={i * 0.06}>
+            <span className="service-num">{s.n}</span>
+            <h3 className="service-name">
+              {s.name}
+              {s.badge && <span className="service-badge">{s.badge}</span>}
+            </h3>
+            <p className="service-desc">{s.desc}</p>
           </FadeIn>
         ))}
       </div>
-      <FadeIn as="div" className="learning-section" y={20} delay={0.25}>
+      <FadeIn as="div" className="learning-section" y={20} delay={0.2}>
         <p className="learning-label">Learning &amp; Exploring</p>
         <div className="learning-chips">
           {LEARNING.map((item) => (
@@ -66,6 +64,64 @@ function Services() {
           ))}
         </div>
       </FadeIn>
+    </section>
+  );
+}
+
+// ============================================================
+// CERTIFICATIONS
+// ============================================================
+const CERTIFICATIONS = [
+  {
+    n: '01',
+    name: 'Model Context Protocol (MCP) Certification',
+    issuer: 'Anthropic Academy',
+    credentialUrl: 'https://verify.skilljar.com/c/xckta4mm95tr',
+  },
+  {
+    n: '02',
+    name: 'Claude Code in Action',
+    issuer: 'Anthropic Academy',
+    credentialUrl: 'https://verify.skilljar.com/c/trwz639m6wkb',
+  },
+  {
+    n: '03',
+    name: 'Oracle Cloud Infrastructure 2025 Certified Architect Associate',
+    issuer: 'Oracle',
+    credentialUrl: 'https://catalog-education.oracle.com/ords/certview/sharebadge?id=4EA75774530BF6331E55A1260210D753624FAF70E8C11479AD825B865048075A',
+  },
+];
+
+function CertificationCard({ cert }) {
+  return (
+    <FadeIn as="article" className="cert-card" y={20} delay={0.05}>
+      <div className="cert-num">{cert.n}</div>
+      <div className="cert-body">
+        <p className="cert-issuer">{cert.issuer}</p>
+        <h3 className="cert-name">{cert.name}</h3>
+      </div>
+      {cert.credentialUrl && (
+        <GhostButton
+          href={cert.credentialUrl}
+          label="View Credential"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cert-btn"
+        />
+      )}
+    </FadeIn>
+  );
+}
+
+function Certifications() {
+  return (
+    <section className="certifications" id="certifications">
+      <FadeIn as="h2" y={30} delay={0}>Certifications</FadeIn>
+      <div className="cert-list">
+        {CERTIFICATIONS.map((c) => (
+          <CertificationCard cert={c} key={c.n} />
+        ))}
+      </div>
     </section>
   );
 }
@@ -92,7 +148,7 @@ function HealthcareArchDiagram() {
       <rect x="1" y="1" width="698" height="74" rx="12"
         fill="rgba(215,226,234,0.05)" stroke="rgba(215,226,234,0.18)" strokeWidth="1.5" />
       <text x="350" y="23" textAnchor="middle"
-        fontFamily="'Kanit',sans-serif" fontSize="9" fontWeight="600" letterSpacing="3" fill="rgba(182,0,168,0.9)">
+        fontFamily="'Kanit',sans-serif" fontSize="9" fontWeight="600" letterSpacing="3" fill="rgba(52,211,153,0.9)">
         FRONTEND
       </text>
       <text x="350" y="43" textAnchor="middle"
@@ -114,9 +170,9 @@ function HealthcareArchDiagram() {
 
       {/* ── API Layer ── */}
       <rect x="1" y="112" width="698" height="104" rx="12"
-        fill="rgba(182,0,168,0.07)" stroke="rgba(182,0,168,0.28)" strokeWidth="1.5" />
+        fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.28)" strokeWidth="1.5" />
       <text x="350" y="133" textAnchor="middle"
-        fontFamily="'Kanit',sans-serif" fontSize="9" fontWeight="600" letterSpacing="3" fill="rgba(182,0,168,0.9)">
+        fontFamily="'Kanit',sans-serif" fontSize="9" fontWeight="600" letterSpacing="3" fill="rgba(52,211,153,0.9)">
         API LAYER
       </text>
       <text x="350" y="153" textAnchor="middle"
@@ -158,7 +214,7 @@ function HealthcareArchDiagram() {
       <rect x="1" y="252" width="228" height="132" rx="12"
         fill="rgba(215,226,234,0.05)" stroke="rgba(215,226,234,0.18)" strokeWidth="1.5" />
       <text x="115" y="273" textAnchor="middle"
-        fontFamily="'Kanit',sans-serif" fontSize="9" fontWeight="600" letterSpacing="3" fill="rgba(182,0,168,0.9)">DATABASE</text>
+        fontFamily="'Kanit',sans-serif" fontSize="9" fontWeight="600" letterSpacing="3" fill="rgba(52,211,153,0.9)">DATABASE</text>
       <text x="115" y="292" textAnchor="middle"
         fontFamily="'Kanit',sans-serif" fontSize="12" fontWeight="500" fill="#D7E2EA">SQL Server · EF Core 10</text>
       <text x="115" y="310" textAnchor="middle"
@@ -174,7 +230,7 @@ function HealthcareArchDiagram() {
       <rect x="240" y="252" width="220" height="132" rx="12"
         fill="rgba(215,226,234,0.05)" stroke="rgba(215,226,234,0.18)" strokeWidth="1.5" />
       <text x="350" y="273" textAnchor="middle"
-        fontFamily="'Kanit',sans-serif" fontSize="9" fontWeight="600" letterSpacing="3" fill="rgba(182,0,168,0.9)">FAX PIPELINE</text>
+        fontFamily="'Kanit',sans-serif" fontSize="9" fontWeight="600" letterSpacing="3" fill="rgba(52,211,153,0.9)">FAX PIPELINE</text>
       <text x="350" y="292" textAnchor="middle"
         fontFamily="'Kanit',sans-serif" fontSize="12" fontWeight="500" fill="#D7E2EA">RingCentral API + SMTP</text>
       <text x="350" y="310" textAnchor="middle"
@@ -190,7 +246,7 @@ function HealthcareArchDiagram() {
       <rect x="471" y="252" width="228" height="132" rx="12"
         fill="rgba(215,226,234,0.05)" stroke="rgba(215,226,234,0.18)" strokeWidth="1.5" />
       <text x="585" y="273" textAnchor="middle"
-        fontFamily="'Kanit',sans-serif" fontSize="9" fontWeight="600" letterSpacing="3" fill="rgba(182,0,168,0.9)">SCHEDULING</text>
+        fontFamily="'Kanit',sans-serif" fontSize="9" fontWeight="600" letterSpacing="3" fill="rgba(52,211,153,0.9)">SCHEDULING</text>
       <text x="585" y="292" textAnchor="middle"
         fontFamily="'Kanit',sans-serif" fontSize="12" fontWeight="500" fill="#D7E2EA">Acuity Scheduling</text>
       <text x="585" y="310" textAnchor="middle"
@@ -206,57 +262,38 @@ function HealthcareArchDiagram() {
 }
 
 // ============================================================
-// CERTIFICATIONS
-// ============================================================
-const CERTIFICATIONS = [
-  {
-    n: '01',
-    name: 'Model Context Protocol (MCP) Certification',
-    issuer: 'Anthropic Academy',
-    credentialUrl: 'https://verify.skilljar.com/c/xckta4mm95tr',
-  },
-];
-
-function CertificationCard({ cert }) {
-  return (
-    <FadeIn as="article" className="cert-card" y={30} delay={0.05}>
-      <div className="cert-num">{cert.n}</div>
-      <div className="cert-body">
-        <p className="cert-issuer">{cert.issuer}</p>
-        <h3 className="cert-name">{cert.name}</h3>
-      </div>
-      {cert.credentialUrl && (
-        <GhostButton
-          href={cert.credentialUrl}
-          label="View Credential"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="cert-btn"
-        />
-      )}
-    </FadeIn>
-  );
-}
-
-function Certifications() {
-  return (
-    <section className="certifications" id="certifications">
-      <FadeIn as="h2" y={40} delay={0}>Certifications</FadeIn>
-      <div className="cert-list">
-        {CERTIFICATIONS.map((c) => (
-          <CertificationCard cert={c} key={c.n} />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-// ============================================================
 // PROJECTS
 // ============================================================
 const PROJECTS = [
   {
     n: '01',
+    cat: 'Client Project',
+    name: 'Healthcare Platform',
+    images: [
+      'assets/healthcare-1-welcome.png',
+      'assets/healthcare-3-corporate.png',
+      'assets/healthcare-2-telehealth.png',
+    ],
+    about: {
+      title: 'NASA Fitness & Space Center Chiropractic Platform',
+      period: 'January 2026 – Present · HIPAA Compliant · Code Private',
+      summary: 'HIPAA-compliant telehealth and corporate-wellness platform built from scratch — migrating a 7-year-old broken .NET Web Forms system to .NET 10 / React 19, with dual-transport fax pipelines, scheduling webhooks, and JWT-secured role-based access across 4 user classes.',
+      architectureSvg: true,
+      points: [
+        'Built .NET 10 / EF Core 10 / SQL Server backend with React 19 + Vite + Tailwind frontend — 48 domain entities, 22 REST controllers',
+        'Dual-transport fax pipeline: RingCentral REST API + SMTP email-to-fax fallback with a QuestPDF generator producing fax-compatible PAR-Q medical clearance forms (PDF 1.4, Helvetica embed, US Letter)',
+        'Full DB-level fax audit trail: fax ID, send time, clearance status — HIPAA traceability for reconciliation',
+        'Acuity Scheduling webhook integration: appointment creation, meeting URL persistence, consent-gated telehealth access (ConsentTelehealth)',
+        'Layered HIPAA consent model: ConsentHipaa, HipaaAuthEndDate, DigitalSignatureName, specialist-referral audit trail (fax sent / response received timestamps)',
+        'JWT + BCrypt authentication with RoleId-qualified login and permission claims (manage_patients, manage_employees…) enforced via [Authorize] attributes and service-layer ownership checks',
+        '4 role classes — Admin, Super Admin, Employer, Patient/Employee — each with distinct UIs and access scopes',
+        'Delivered via Azure DevOps user stories; weekly planning and demoing to mentor and CEO',
+      ],
+      stack: ['.NET 10', 'EF Core 10', 'SQL Server', 'React 19', 'Vite', 'Tailwind CSS', 'RingCentral API', 'QuestPDF', 'JWT Auth', 'BCrypt', 'Azure DevOps', 'Acuity Scheduling', 'SMTP / TLS'],
+    },
+  },
+  {
+    n: '02',
     cat: 'Personal Project',
     name: 'Realtime Chat',
     liveUrl: 'https://nodejs-reactjs-chats.onrender.com',
@@ -285,46 +322,19 @@ const PROJECTS = [
     },
   },
   {
-    n: '02',
-    cat: 'Client Project',
-    name: 'Healthcare Platform',
-    images: [
-      'assets/healthcare-1-welcome.png',
-      'assets/healthcare-3-corporate.png',
-      'assets/healthcare-2-telehealth.png',
-    ],
-    about: {
-      title: 'NASA Fitness & Space Center Chiropractic Platform',
-      period: 'January 2026 – Present · HIPAA Compliant · Code Private',
-      summary: 'HIPAA-compliant telehealth and corporate-wellness platform built from scratch — migrating a 7-year-old broken .NET Web Forms system to .NET 10 / React 19, with dual-transport fax pipelines, scheduling webhooks, and JWT-secured role-based access across 4 user classes.',
-      architectureSvg: true,
-      points: [
-        'Built .NET 10 / EF Core 10 / SQL Server backend with React 19 + Vite + Tailwind frontend — 48 domain entities, 22 REST controllers',
-        'Dual-transport fax pipeline: RingCentral REST API + SMTP email-to-fax fallback with a QuestPDF generator producing fax-compatible PAR-Q medical clearance forms (PDF 1.4, Helvetica embed, US Letter)',
-        'Full DB-level fax audit trail: fax ID, send time, clearance status — HIPAA traceability for reconciliation',
-        'Acuity Scheduling webhook integration: appointment creation, meeting URL persistence, consent-gated telehealth access (ConsentTelehealth)',
-        'Layered HIPAA consent model: ConsentHipaa, HipaaAuthEndDate, DigitalSignatureName, specialist-referral audit trail (fax sent / response received timestamps)',
-        'JWT + BCrypt authentication with RoleId-qualified login and permission claims (manage_patients, manage_employees…) enforced via [Authorize] attributes and service-layer ownership checks',
-        '4 role classes — Admin, Super Admin, Employer, Patient/Employee — each with distinct UIs and access scopes',
-        'Delivered via Azure DevOps user stories; weekly planning and demoing to mentor and CEO',
-      ],
-      stack: ['.NET 10', 'EF Core 10', 'SQL Server', 'React 19', 'Vite', 'Tailwind CSS', 'RingCentral API', 'QuestPDF', 'JWT Auth', 'BCrypt', 'Azure DevOps', 'Acuity Scheduling', 'SMTP / TLS'],
-    },
-  },
-  {
     n: '03',
-    cat: 'Personal Project',
-    name: 'Service Broker System',
-    repoUrl: 'https://github.com/dhruvi-2623/service-broker-system',
-    summary: 'A service registry that brokers requests between client apps and back-end services — React 19 admin dashboard, Node + Express backend, SQLite for local dev and MySQL for production.',
+    cat: 'In Progress',
+    name: 'MCP + LLM Integration',
+    badge: 'Building Now',
+    summary: 'Extending the real-time chat app with a Model Context Protocol server — exposing chat tools and resources to LLMs so an agent can read conversations, list contacts, and send messages through the live app.',
     features: [
-      'Service registry with health tracking and per-instance status history',
-      'Password hashing service using bcrypt + bcryptjs for credential security',
-      'Random-token service for short-lived API keys and verification codes',
-      'Email notifications via Nodemailer when service state changes',
-      'Admin dashboard with React Router 7 routing and Axios-driven views',
+      'MCP server in Node.js exposing tools: send_message, list_contacts, get_history',
+      'LLM tool-use loop — Claude reads live chat state and takes real in-app actions via Socket.IO',
+      'MCP resources: conversation history and user presence as structured, queryable data',
+      'Zero breaking changes — connects to the existing backend with a new MCP transport layer',
+      'Built on Anthropic MCP certification — applying the protocol spec to a shipped product',
     ],
-    stack: ['React 19', 'Express', 'SQLite', 'MySQL', 'bcrypt', 'Nodemailer', 'Axios'],
+    stack: ['Model Context Protocol', 'Node.js', 'Socket.IO', 'Claude API', 'TypeScript', 'JSON-RPC 2.0'],
   },
   {
     n: '04',
@@ -339,18 +349,18 @@ const PROJECTS = [
   },
   {
     n: '05',
-    cat: 'In Progress',
-    name: 'MCP + LLM Integration',
-    badge: 'Building Now',
-    summary: 'Extending the real-time chat app with a Model Context Protocol server — exposing chat tools and resources to LLMs so an agent can read conversations, list contacts, and send messages through the live app.',
+    cat: 'Personal Project',
+    name: 'Service Broker System',
+    repoUrl: 'https://github.com/dhruvi-2623/service-broker-system',
+    summary: 'A service registry that brokers requests between client apps and back-end services — React 19 admin dashboard, Node + Express backend, SQLite for local dev and MySQL for production.',
     features: [
-      'MCP server in Node.js exposing tools: send_message, list_contacts, get_history',
-      'LLM tool-use loop — Claude reads live chat state and takes real in-app actions via Socket.IO',
-      'MCP resources: conversation history and user presence as structured, queryable data',
-      'Zero breaking changes — connects to the existing backend with a new MCP transport layer',
-      'Built on Anthropic MCP certification — applying the protocol spec to a shipped product',
+      'Service registry with health tracking and per-instance status history',
+      'Password hashing service using bcrypt + bcryptjs for credential security',
+      'Random-token service for short-lived API keys and verification codes',
+      'Email notifications via Nodemailer when service state changes',
+      'Admin dashboard with React Router 7 routing and Axios-driven views',
     ],
-    stack: ['Model Context Protocol', 'Node.js', 'Socket.IO', 'Claude API', 'TypeScript', 'JSON-RPC 2.0'],
+    stack: ['React 19', 'Express', 'SQLite', 'MySQL', 'bcrypt', 'Nodemailer', 'Axios'],
   },
 ];
 
@@ -427,58 +437,50 @@ function AboutModal({ project, onClose }) {
   );
 }
 
-function ProjectCard({ project, index, total }) {
-  const cardRef = useRef(null);
-  const slotRef = useRef(null);
+function ProjectCard({ project, index }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const reducedMotion = usePrefersReducedMotion();
-
-  useEffect(() => {
-    const targetScale = 1 - (total - 1 - index) * 0.03;
-    const card = cardRef.current;
-    const slot = slotRef.current;
-    if (!card || !slot || reducedMotion) return;
-
-    const onScroll = () => {
-      const rect = slot.getBoundingClientRect();
-      const stickyTop = window.innerWidth >= 768 ? 96 : 64;
-      const totalDist = window.innerHeight * 0.85;
-      const passed = stickyTop - rect.top;
-      const p = Math.max(0, Math.min(1, passed / totalDist));
-      const isLast = index === (total - 1);
-      const scale = isLast ? 1 : 1 - (1 - targetScale) * p;
-      card.style.transform = `scale(${scale})`;
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-    };
-  }, [index, total, reducedMotion]);
-
-  const stickyTop = `calc(6rem + ${index * 52}px)`;
-  const hasImages = Array.isArray(project.images) && project.images.length > 0;
-  const isFour = hasImages && project.images.length >= 4;
+  const thumb = project.images && project.images[0];
 
   return (
     <>
       {modalOpen && <AboutModal project={project} onClose={() => setModalOpen(false)} />}
-      <div className="project-slot" ref={slotRef} style={{ top: stickyTop }}>
-        <div
-          className={`project-card${!hasImages ? " project-card--content" : ""}`}
-          ref={cardRef}
-        >
-          <div className="project-head">
-            <div className="project-num">{project.n}</div>
-            <div className="project-info">
-              <span className="project-cat">
-                {project.cat}
-                {project.badge && <span className="project-badge">{project.badge}</span>}
-              </span>
-              <h3 className="project-name">{project.name}</h3>
+      <FadeIn as="article" className="project-card" y={30} delay={index * 0.05}>
+        <div className="project-card-inner">
+          {thumb && (
+            <div className="project-thumb">
+              <img src={thumb} alt="" loading="lazy" />
             </div>
+          )}
+          <div className="project-card-body">
+            <div className="project-head">
+              <span className="project-num">{project.n}</span>
+              <div className="project-info">
+                <span className="project-cat">
+                  {project.cat}
+                  {project.badge && <span className="project-badge">{project.badge}</span>}
+                </span>
+                <h3 className="project-name">{project.name}</h3>
+              </div>
+            </div>
+
+            {project.summary && <p className="project-summary">{project.summary}</p>}
+
+            {project.features && (
+              <ul className="project-features">
+                {project.features.map((f, i) => (
+                  <li key={i}>{f}</li>
+                ))}
+              </ul>
+            )}
+
+            {project.stack && (
+              <div className="project-chips">
+                {project.stack.map((s) => (
+                  <span key={s} className="project-chip">{s}</span>
+                ))}
+              </div>
+            )}
+
             <div className="project-btns">
               {project.liveUrl && (
                 <GhostButton href={project.liveUrl} label="Live Demo" target="_blank" rel="noopener noreferrer" />
@@ -491,49 +493,8 @@ function ProjectCard({ project, index, total }) {
               )}
             </div>
           </div>
-
-          {!hasImages ? (
-            <div className="project-content">
-              <p className="project-summary">{project.summary}</p>
-              <ul className="project-features">
-                {project.features.map((f, i) => (
-                  <li key={i}>{f}</li>
-                ))}
-              </ul>
-              <div className="project-chips">
-                {project.stack.map((s) => (
-                  <span key={s} className="project-chip">{s}</span>
-                ))}
-              </div>
-            </div>
-          ) : isFour ? (
-            <div className="project-grid project-grid--quad">
-              <div className="project-col">
-                <div className="project-img half"><img src={project.images[0]} alt="" loading="lazy" /></div>
-                <div className="project-img half"><img src={project.images[1]} alt="" loading="lazy" /></div>
-              </div>
-              <div className="project-col">
-                <div className="project-img half"><img src={project.images[2]} alt="" loading="lazy" /></div>
-                <div className="project-img half"><img src={project.images[3]} alt="" loading="lazy" /></div>
-              </div>
-            </div>
-          ) : (
-            <div className="project-grid">
-              <div className="project-col-1">
-                <div className="project-img top">
-                  <img src={project.images[0]} alt="" loading="lazy" />
-                </div>
-                <div className="project-img bot">
-                  <img src={project.images[1]} alt="" loading="lazy" />
-                </div>
-              </div>
-              <div className="project-img tall">
-                <img src={project.images[2]} alt="" loading="lazy" />
-              </div>
-            </div>
-          )}
         </div>
-      </div>
+      </FadeIn>
     </>
   );
 }
@@ -541,10 +502,10 @@ function ProjectCard({ project, index, total }) {
 function Projects() {
   return (
     <section className="projects" id="projects">
-      <h2 className="hero-heading">Projects</h2>
+      <FadeIn as="h2" y={30} delay={0}>Projects</FadeIn>
       <div className="projects-list">
         {PROJECTS.map((p, i) => (
-          <ProjectCard key={p.n} project={p} index={i} total={PROJECTS.length} />
+          <ProjectCard project={p} index={i} key={p.n} />
         ))}
       </div>
     </section>
@@ -573,10 +534,10 @@ function Testimonials() {
 
   return (
     <section className="testimonials" id="testimonials">
-      <FadeIn as="h2" y={40} delay={0}>Recommendations</FadeIn>
+      <FadeIn as="h2" y={30} delay={0}>Recommendations</FadeIn>
       <div className="testimonial-list">
         {TESTIMONIALS.map((t, i) => (
-          <FadeIn as="figure" className="testimonial-card" y={30} delay={i * 0.1} key={t.name}>
+          <FadeIn as="figure" className="testimonial-card" y={20} delay={i * 0.1} key={t.name}>
             <blockquote className="testimonial-quote">&ldquo;{t.quote}&rdquo;</blockquote>
             <figcaption className="testimonial-attribution">
               <span className="testimonial-name">{t.name}</span>
@@ -595,65 +556,14 @@ function Testimonials() {
 // ============================================================
 // CONTACT
 // ============================================================
-const CONTACT_EMAIL = 'dhruvipatel2623@gmail.com';
-
 function Contact() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
-    const message = form.message.value.trim();
-
-    const subject = `Portfolio message from ${name || 'website visitor'}`;
-    const body = `${message}\n\n— ${name}${email ? ` (${email})` : ''}`;
-    const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    window.location.href = mailto;
-  };
-
   return (
     <section className="contact-section" id="contact">
-      <FadeIn as="h2" className="hero-heading contact-heading" y={40} delay={0}>
+      <FadeIn as="h2" className="contact-heading" y={30} delay={0}>
         Say Hello
       </FadeIn>
 
-      <FadeIn as="div" className="contact-wrap" y={30} delay={0.1}>
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <label className="sr-only" htmlFor="contact-name">Name</label>
-          <input
-            id="contact-name"
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            className="contact-input"
-            required
-            autoComplete="name"
-          />
-          <label className="sr-only" htmlFor="contact-email">Email</label>
-          <input
-            id="contact-email"
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            className="contact-input"
-            required
-            autoComplete="email"
-          />
-          <label className="sr-only" htmlFor="contact-message">Message</label>
-          <textarea
-            id="contact-message"
-            name="message"
-            placeholder="Message"
-            className="contact-input contact-textarea"
-            required
-          />
-          <button type="submit" className="contact-btn contact-submit">
-            Send Message
-          </button>
-          <p className="contact-hint">Opens your email app, addressed to me — nothing is sent from this page.</p>
-        </form>
-
+      <FadeIn as="div" className="contact-wrap" y={20} delay={0.1}>
         <div className="contact-links-row">
           <a href="mailto:dhruvipatel2623@gmail.com" className="contact-link">
             dhruvipatel2623@gmail.com
@@ -676,14 +586,7 @@ function Contact() {
 function Footer() {
   return (
     <footer className="site-footer">
-      <nav className="site-footer-nav" aria-label="Footer navigation">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="/resume.pdf" download>Résumé</a>
-        <a href="mailto:dhruvipatel2623@gmail.com">Email</a>
-        <a href="https://github.com/dhruvi-2623" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://www.linkedin.com/in/dhruvipatel2623" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      </nav>
+      <p className="site-footer-signature">Dhruviben Patel — Full-Stack Software Engineer</p>
       <p className="site-footer-copy">&copy; 2026 Dhruviben Patel &middot; Houston, Texas</p>
     </footer>
   );
