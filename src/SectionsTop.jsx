@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { FadeIn, AnimatedText } from "./Components.jsx";
+import { FadeIn, AnimatedText, usePrefersReducedMotion } from "./Components.jsx";
 
 // ============================================================
 // HERO
@@ -11,8 +11,9 @@ function Hero() {
         <a href="#" className="navbar-brand">Dhruviben Patel</a>
         <nav>
           <a href="#about">About</a>
-          <a href="#services">Skills</a>
+          <a href="#education">Education</a>
           <a href="#experience">Experience</a>
+          <a href="#services">Skills</a>
           <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
           <a href="https://github.com/dhruvi-2623" target="_blank" rel="noopener">GitHub</a>
@@ -63,8 +64,10 @@ function Marquee() {
   const sectionRef = useRef(null);
   const row1 = useRef(null);
   const row2 = useRef(null);
+  const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
+    if (reducedMotion) return;
     const onScroll = () => {
       const sec = sectionRef.current;
       if (!sec) return;
@@ -80,7 +83,7 @@ function Marquee() {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, []);
+  }, [reducedMotion]);
 
   const first = MARQUEE_IMAGES.slice(0, 7);
   const second = MARQUEE_IMAGES.slice(7);
