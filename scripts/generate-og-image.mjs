@@ -57,16 +57,16 @@ const svg = `
   <!-- status badge -->
   <rect x="110" y="96" width="430" height="44" rx="22" fill="#D7E2EA" fill-opacity="0.035" stroke="#D7E2EA" stroke-opacity="0.14"/>
   <circle cx="136" cy="118" r="4.5" fill="#34D399"/>
-  <text x="152" y="123" font-family="Mono" font-size="15" letter-spacing="1.5" fill="#B7C2CC">HOUSTON, TX &#183; OPEN TO FULL-TIME SWE</text>
+  <text x="152" y="123" font-family="Mono" font-size="15" letter-spacing="1.5" fill="#B7C2CC">HOUSTON, TX &#183; AI / FORWARD DEPLOYED / BACKEND</text>
 
   <!-- name -->
   <text x="108" y="270" font-family="Kanit ExtraBold" font-size="92" letter-spacing="-1" fill="url(#heading)">Dhruviben Patel</text>
 
   <!-- role -->
-  <text x="110" y="325" font-family="Kanit Bold" font-size="34" letter-spacing="1" fill="#34D399">FULL-STACK SOFTWARE ENGINEER</text>
+  <text x="110" y="325" font-family="Kanit Bold" font-size="34" letter-spacing="1" fill="#34D399">AI ENGINEER &#183; BACKEND</text>
 
   <!-- description -->
-  <text x="110" y="380" font-family="Mono" font-size="19" fill="#9AA6B2">React &#183; TypeScript &#183; Node.js &#183; ASP.NET Core &#183; SQL Server</text>
+  <text x="110" y="380" font-family="Mono" font-size="19" fill="#9AA6B2">Gemini &#183; RAG &#183; MCP &#183; .NET 10 &#183; Node.js &#183; React Native</text>
 
   <!-- stat row -->
   <text x="110" y="470" font-family="Kanit Bold" font-size="30" fill="#EAF1F5">05</text>

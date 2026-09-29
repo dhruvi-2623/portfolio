@@ -2,42 +2,34 @@ import { useEffect, useState } from "react";
 import { FadeIn, GhostButton } from "./Components.jsx";
 
 // ============================================================
-// SKILLS — 5 confirmed skill groups + Learning subsection
+// SKILLS: 5 skill groups aligned to AI, forward deployed, and backend roles
 // ============================================================
 const SERVICES = [
   {
     n: '01',
-    name: 'Frontend Engineering',
-    desc: 'React 18/19, TypeScript, JavaScript — component systems, responsive layouts, scroll-driven animations, code-splitting, and performance-first interfaces built for real users.',
+    name: 'AI Engineering & LLM Apps',
+    desc: 'Multi-agent systems on the Gemini API with RAG for grounded answers. Built SyncMind AI, a four-agent workspace (Research, Planner, Summarizer, Code Review) deployed on Google Cloud. Anthropic-certified in MCP and Claude Code, building an MCP server so an LLM can take real actions inside a live app.',
   },
   {
     n: '02',
     name: 'Backend & APIs',
-    desc: 'ASP.NET Core (.NET 10), Node.js, Express — 22-controller REST APIs with JWT auth, BCrypt, EF Core, role-based access (4 user classes), and HIPAA-compliant audit logging. End-to-end API ownership from schema to deployment.',
+    desc: '.NET 10, EF Core, Node.js, and Express. Shipped a 22-controller REST API over a 48-entity domain model with JWT + BCrypt auth, 4-tier role-based access, and HIPAA audit logging. Comfortable owning an API from schema design to deployment.',
   },
   {
     n: '03',
-    name: 'Databases & Data',
-    desc: 'SQL Server, PostgreSQL, MongoDB, SQLite — schema design, query optimization, indexing, EF Core migrations. Owned a 48-entity domain model from scratch in a production healthcare system.',
+    name: 'Forward Deployed Delivery',
+    desc: 'I work close to the people using the software: turning clinic and founder requirements into specs, demoing weekly, and iterating in production. Integrated RingCentral, Acuity Scheduling webhooks, SMTP/TLS, and Cloudinary into systems real users depend on.',
   },
   {
     n: '04',
-    name: 'Real-Time & Integrations',
-    desc: 'Socket.IO WebSocket systems with rooms, presence, and typing indicators. Third-party integrations: RingCentral fax pipeline, Acuity Scheduling webhooks, Cloudinary CDN, SMTP/TLS delivery.',
+    name: 'Data & Real-Time Systems',
+    desc: 'SQL Server, PostgreSQL, MySQL, MongoDB, Firebase, and vector databases. Socket.IO messaging with targeted delivery and live presence, plus EF Core migrations and relational schema design for regulated data.',
   },
   {
     n: '05',
-    name: 'AI & LLM Integration',
-    desc: 'Anthropic MCP-certified. Building a Model Context Protocol server on the chat app — exposing tools and resources so an LLM can take real in-app actions. Prompt engineering and LLM tool-use applied to production software.',
-    badge: 'Building Now',
+    name: 'Cloud, Mobile & Delivery',
+    desc: 'Google Cloud, AWS (S3, EC2, SQS), Docker, Kubernetes, CI/CD, and Azure DevOps. Cross-platform mobile with React Native and SwiftUI, and frontends in React 19, TypeScript, and Tailwind.',
   },
-];
-
-const LEARNING = [
-  'Azure Cloud Deployments',
-  'Docker',
-  'GitHub Actions CI/CD',
-  'RAG / Vector Databases',
 ];
 
 function Services() {
@@ -56,14 +48,6 @@ function Services() {
           </FadeIn>
         ))}
       </div>
-      <FadeIn as="div" className="learning-section" y={20} delay={0.2}>
-        <p className="learning-label">Learning &amp; Exploring</p>
-        <div className="learning-chips">
-          {LEARNING.map((item) => (
-            <span key={item} className="learning-chip">{item}</span>
-          ))}
-        </div>
-      </FadeIn>
     </section>
   );
 }
@@ -90,6 +74,13 @@ const CERTIFICATIONS = [
     issuer: 'Oracle',
     credentialUrl: 'https://catalog-education.oracle.com/ords/certview/sharebadge?id=4EA75774530BF6331E55A1260210D753624FAF70E8C11479AD825B865048075A',
   },
+  {
+    n: '04',
+    name: 'Artificial Intelligence Investment as a Strategic Signal: Implications for Stakeholder Confidence',
+    issuer: 'Publication · IJESRT Vol. 15(4), 2026',
+    credentialUrl: 'https://doi.org/10.64149/j.ijesrt.15.4.32-46',
+    label: 'Read Paper',
+  },
 ];
 
 function CertificationCard({ cert }) {
@@ -103,7 +94,7 @@ function CertificationCard({ cert }) {
       {cert.credentialUrl && (
         <GhostButton
           href={cert.credentialUrl}
-          label="View Credential"
+          label={cert.label || "View Credential"}
           target="_blank"
           rel="noopener noreferrer"
           className="cert-btn"
@@ -116,7 +107,7 @@ function CertificationCard({ cert }) {
 function Certifications() {
   return (
     <section className="certifications" id="certifications">
-      <FadeIn as="h2" y={30} delay={0}>Certifications</FadeIn>
+      <FadeIn as="h2" y={30} delay={0}>Certifications &amp; Research</FadeIn>
       <div className="cert-list">
         {CERTIFICATIONS.map((c) => (
           <CertificationCard cert={c} key={c.n} />
@@ -267,8 +258,24 @@ function HealthcareArchDiagram() {
 const PROJECTS = [
   {
     n: '01',
-    cat: 'Client Project',
+    cat: 'AI Engineering · Hackathon',
+    name: 'SyncMind AI',
+    repoUrl: 'https://github.com/dhruvi-2623/syncmind-ai',
+    summary: 'Multi-agent workspace built for the Google Cloud Rapid Agent Hackathon (Devpost, 2026). Upload a PRD and a supervisor agent runs it through research, summary, sprint planning, and code review, streaming every step live to everyone in the workspace.',
+    features: [
+      'Supervisor agent orchestrates 4 Gemini agents (Research, Summarizer, Planner, Code Review), gating each phase on the previous result',
+      'RAG over uploaded PDFs: documents are parsed, chunked, and stored in MongoDB, then retrieved as grounded context for each agent',
+      'Runs on Gemini through Google AI Studio or Vertex AI, with a demo mode so it can be evaluated without secrets',
+      'Socket.IO pushes the action log, timeline, kanban, and review panels to every connected user in real time, with live presence',
+      'Node.js + Express API with Cloud Storage uploads, built for Cloud Run deployment on Google Cloud',
+    ],
+    stack: ['Gemini API', 'Vertex AI', 'Multi-Agent', 'RAG', 'Node.js', 'Express', 'Socket.IO', 'MongoDB', 'React', 'Google Cloud'],
+  },
+  {
+    n: '02',
+    cat: 'Backend · Client Project',
     name: 'Healthcare Platform',
+    summary: 'Client-facing .NET 10 + React 19 telehealth platform: 48-entity domain, 22 REST controllers, HIPAA audit trail, RingCentral fax pipeline, and Acuity webhooks. Scoped directly with the clinic.',
     images: [
       'assets/healthcare-1-welcome.png',
       'assets/healthcare-3-corporate.png',
@@ -276,26 +283,42 @@ const PROJECTS = [
     ],
     about: {
       title: 'NASA Fitness & Space Center Chiropractic Platform',
-      period: 'January 2026 – Present · HIPAA Compliant · Code Private',
-      summary: 'HIPAA-compliant telehealth and corporate-wellness platform built from scratch — migrating a 7-year-old broken .NET Web Forms system to .NET 10 / React 19, with dual-transport fax pipelines, scheduling webhooks, and JWT-secured role-based access across 4 user classes.',
+      period: 'Jan 2026 – Present · HIPAA Compliant · Code Private',
+      summary: 'HIPAA-compliant telehealth and corporate-wellness platform for a real clinic. I gathered requirements from the client, then migrated a 7-year-old .NET Web Forms system to .NET 10 and React 19 with a dual-transport fax pipeline, scheduling webhooks, and JWT-secured role-based access across 4 user classes.',
       architectureSvg: true,
       points: [
-        'Built .NET 10 / EF Core 10 / SQL Server backend with React 19 + Vite + Tailwind frontend — 48 domain entities, 22 REST controllers',
+        'Built a .NET 10 / EF Core 10 / SQL Server backend with a React 19 + Vite + Tailwind frontend: 48 domain entities, 22 REST controllers',
         'Dual-transport fax pipeline: RingCentral REST API + SMTP email-to-fax fallback with a QuestPDF generator producing fax-compatible PAR-Q medical clearance forms (PDF 1.4, Helvetica embed, US Letter)',
-        'Full DB-level fax audit trail: fax ID, send time, clearance status — HIPAA traceability for reconciliation',
+        'Full DB-level fax audit trail: fax ID, send time, clearance status, giving HIPAA traceability for reconciliation',
         'Acuity Scheduling webhook integration: appointment creation, meeting URL persistence, consent-gated telehealth access (ConsentTelehealth)',
         'Layered HIPAA consent model: ConsentHipaa, HipaaAuthEndDate, DigitalSignatureName, specialist-referral audit trail (fax sent / response received timestamps)',
         'JWT + BCrypt authentication with RoleId-qualified login and permission claims (manage_patients, manage_employees…) enforced via [Authorize] attributes and service-layer ownership checks',
-        '4 role classes — Admin, Super Admin, Employer, Patient/Employee — each with distinct UIs and access scopes',
-        'Delivered via Azure DevOps user stories; weekly planning and demoing to mentor and CEO',
+        '4 role classes (Admin, Super Admin, Employer, Patient/Employee), each with distinct UIs and access scopes',
+        'Translated clinic stakeholder requirements into technical specs and Azure DevOps user stories; demoed weekly to the mentor and CEO and iterated on feedback',
       ],
       stack: ['.NET 10', 'EF Core 10', 'SQL Server', 'React 19', 'Vite', 'Tailwind CSS', 'RingCentral API', 'QuestPDF', 'JWT Auth', 'BCrypt', 'Azure DevOps', 'Acuity Scheduling', 'SMTP / TLS'],
     },
   },
   {
-    n: '02',
-    cat: 'Personal Project',
+    n: '03',
+    cat: 'AI Engineering · In Progress',
+    name: 'MCP Server for Live Chat',
+    badge: 'Building Now',
+    summary: 'Extending the real-time chat app with a Model Context Protocol server, exposing chat tools and resources to LLMs so an agent can read conversations, list contacts, and send messages through the live app.',
+    features: [
+      'MCP server in Node.js exposing tools: send_message, list_contacts, get_history',
+      'LLM tool-use loop: Claude reads live chat state and takes real in-app actions via Socket.IO',
+      'MCP resources: conversation history and user presence as structured, queryable data',
+      'Zero breaking changes: connects to the existing backend through a new MCP transport layer',
+      'Applies my Anthropic MCP certification to a shipped product',
+    ],
+    stack: ['Model Context Protocol', 'Node.js', 'Socket.IO', 'Claude API', 'TypeScript', 'JSON-RPC 2.0'],
+  },
+  {
+    n: '04',
+    cat: 'Full-Stack · Real-Time',
     name: 'Realtime Chat',
+    summary: 'Live messaging app with Socket.IO targeted delivery and presence, JWT in httpOnly cookies, and Cloudinary uploads. Deployed on Render, and the base for my MCP server work.',
     liveUrl: 'https://nodejs-reactjs-chats.onrender.com',
     repoUrl: 'https://github.com/dhruvi-2623/nodejs-reactjs-chats',
     images: [
@@ -306,14 +329,14 @@ const PROJECTS = [
     about: {
       title: 'Real-Time Chat Application',
       period: 'Personal Project · 2024',
-      summary: 'Full-stack messaging app with WebSocket-driven real-time delivery, JWT auth in httpOnly cookies, profile image uploads via Cloudinary, and live presence — deployed on Render.',
+      summary: 'Full-stack messaging app with real-time delivery over Socket.IO, JWT auth in httpOnly cookies, Cloudinary image uploads, and live presence, deployed on Render.',
       points: [
-        'Socket.IO WebSocket system with rooms, typing indicators, presence, and sub-100ms message delivery',
-        'JWT authentication stored in httpOnly cookies — XSS-safe session management without localStorage',
-        'Cloudinary integration for user profile image uploads with automatic CDN delivery and resizing',
-        'MongoDB + Mongoose backend — conversations, messages, and user schemas with proper indexing',
-        'React frontend with optimistic UI updates, scroll-to-bottom behavior, and automatic reconnect handling',
-        'Deployed live on Render — try it at the link below',
+        'Socket.IO messaging with a server-side userId to socketId map for targeted delivery and live online presence',
+        'JWT stored in httpOnly cookies for XSS-safe sessions, bcryptjs hashing, and a protectRoute middleware on every protected call',
+        'Cloudinary for profile images, persisting only the secure URL in MongoDB',
+        'MongoDB + Mongoose schemas for users, conversations, and messages',
+        'Found and fixed a delivery race where the client emitted joinChat with no server handler, moving routing fully to the socket map',
+        'Deployed live on Render with GitHub auto-deploy; Express serves the React build in production',
         'Currently extending with a Model Context Protocol server for LLM tool-use integration',
       ],
       stack: ['React', 'Node.js', 'Express', 'Socket.IO', 'MongoDB', 'Mongoose', 'JWT', 'httpOnly Cookies', 'Cloudinary', 'Render'],
@@ -322,37 +345,11 @@ const PROJECTS = [
     },
   },
   {
-    n: '03',
-    cat: 'In Progress',
-    name: 'MCP + LLM Integration',
-    badge: 'Building Now',
-    summary: 'Extending the real-time chat app with a Model Context Protocol server — exposing chat tools and resources to LLMs so an agent can read conversations, list contacts, and send messages through the live app.',
-    features: [
-      'MCP server in Node.js exposing tools: send_message, list_contacts, get_history',
-      'LLM tool-use loop — Claude reads live chat state and takes real in-app actions via Socket.IO',
-      'MCP resources: conversation history and user presence as structured, queryable data',
-      'Zero breaking changes — connects to the existing backend with a new MCP transport layer',
-      'Built on Anthropic MCP certification — applying the protocol spec to a shipped product',
-    ],
-    stack: ['Model Context Protocol', 'Node.js', 'Socket.IO', 'Claude API', 'TypeScript', 'JSON-RPC 2.0'],
-  },
-  {
-    n: '04',
-    cat: 'Full-Stack',
-    name: 'Foody — Home Kitchen',
-    repoUrl: 'https://github.com/dhruvi-2623/foody-main',
-    images: [
-      'assets/foody-1-burger.png',
-      'assets/foody-2-cart.png',
-      'assets/foody-3-catering.png',
-    ],
-  },
-  {
     n: '05',
-    cat: 'Personal Project',
+    cat: 'Backend · Distributed Systems',
     name: 'Service Broker System',
     repoUrl: 'https://github.com/dhruvi-2623/service-broker-system',
-    summary: 'A service registry that brokers requests between client apps and back-end services — React 19 admin dashboard, Node + Express backend, SQLite for local dev and MySQL for production.',
+    summary: 'A service registry that brokers requests between client apps and back-end services: React 19 admin dashboard, Node + Express backend, SQLite for local dev and MySQL for production.',
     features: [
       'Service registry with health tracking and per-instance status history',
       'Password hashing service using bcrypt + bcryptjs for credential security',
@@ -516,7 +513,7 @@ function Projects() {
 // TESTIMONIALS / RECOMMENDATIONS
 // ------------------------------------------------------------
 // Empty until quotes are added. To publish a testimonial, add an
-// entry here — { quote, name, title, company, avatar? } — and the
+// entry here ({ quote, name, title, company, avatar? }) and the
 // section renders automatically. Left empty, the section renders
 // nothing so an empty block never ships to the live site.
 // ============================================================
@@ -586,7 +583,7 @@ function Contact() {
 function Footer() {
   return (
     <footer className="site-footer">
-      <p className="site-footer-signature">Dhruviben Patel — Full-Stack Software Engineer</p>
+      <p className="site-footer-signature">Dhruviben Patel · AI Engineer · Forward Deployed · Backend</p>
       <p className="site-footer-copy">&copy; 2026 Dhruviben Patel &middot; Houston, Texas</p>
     </footer>
   );
