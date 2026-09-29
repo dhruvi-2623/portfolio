@@ -3,13 +3,13 @@ import { FadeIn } from "./Components.jsx";
 // ============================================================
 // HERO
 // ============================================================
-// Counts mirror the Experience / Projects / Education / Certifications
-// arrays in their respective section files — update together if those change.
+// Impact numbers pulled from the Experience and Projects sections.
+// Update together if those change.
 const HERO_STATS = [
-  { n: '03', label: 'Roles Held' },
-  { n: '05', label: 'Projects Shipped' },
-  { n: '02', label: 'Degrees' },
-  { n: '03', label: 'Certifications' },
+  { n: '4', label: 'LLM Agents' },
+  { n: '22', label: 'REST Controllers' },
+  { n: '60→95', label: 'Lighthouse Score' },
+  { n: '200', label: 'Early Adopters' },
 ];
 
 function Hero() {
@@ -38,7 +38,7 @@ function Hero() {
 
       <div className="hero-main">
         <FadeIn as="div" className="hero-status-wrap" y={-10} delay={0.05}>
-          <p className="hero-location">Houston, TX &middot; Open to full-time SWE roles</p>
+          <p className="hero-location">Houston, TX &middot; Open to AI, Forward Deployed &amp; Backend roles</p>
         </FadeIn>
 
         <FadeIn as="h1" className="hero-heading" y={30} delay={0.15}>
@@ -46,11 +46,11 @@ function Hero() {
         </FadeIn>
 
         <FadeIn as="p" className="hero-tagline" y={20} delay={0.22}>
-          Full-Stack Software Engineer
+          AI Engineer &middot; Forward Deployed &middot; Backend
         </FadeIn>
 
         <FadeIn as="p" className="hero-description" y={20} delay={0.3}>
-          I build full-stack web products with React, TypeScript, Node.js, ASP.NET Core, MongoDB, and SQL Server. I take end-to-end ownership — from system design through production delivery. Currently integrating LLM tool-use via the Model Context Protocol into real shipped apps.
+          I build LLM-powered systems and the backends that run them: multi-agent apps on the Gemini API with RAG, .NET 10 and Node.js APIs, and integrations that hold up in production. Software Developer at Bigblue Technologies, where I'm shipping the company's Android app with React Native, Firebase, and Claude Code.
         </FadeIn>
 
         <FadeIn as="div" className="hero-ctas" y={20} delay={0.4}>
@@ -76,15 +76,35 @@ function Hero() {
 // ABOUT
 // ============================================================
 function About() {
-  const text = "I build full-stack web products with React, TypeScript, Node.js, ASP.NET Core, MongoDB, and SQL Server. I take end-to-end ownership — from system design through production delivery. Currently integrating LLM tool-use via the Model Context Protocol into real shipped apps.";
+  const paragraphs = [
+    "I'm a software engineer who likes sitting between the customer and the codebase. I take a messy requirement, turn it into a spec, build the backend and integrations, and stay with it until it works in production.",
+    "Right now I'm a Software Developer at Bigblue Technologies, converting the company's production iOS app to Android with React Native and Firebase and using Claude Code to move faster without skipping review. Before that I stabilized the SwiftUI app for its first 200 early adopters and rebuilt the marketing site from a Lighthouse score of 60 to 95.",
+    "On the AI side, I built SyncMind AI, a four-agent workspace on the Gemini API with RAG, deployed on Google Cloud. On the backend side, I migrated a 7-year-old .NET Web Forms system into a HIPAA-compliant .NET 10 API with 48 entities, 22 controllers, and a fax pipeline clinics rely on. I hold Anthropic certifications in MCP and Claude Code, and I published research on AI investment as a strategic signal.",
+  ];
+
+  const focus = [
+    { k: 'AI Engineering', v: 'LLM apps, multi-agent orchestration, RAG, MCP tool-use' },
+    { k: 'Forward Deployed', v: 'Stakeholder requirements to specs, integrations, demos, iteration' },
+    { k: 'Backend', v: '.NET 10, EF Core, Node.js, REST, auth, SQL and NoSQL data models' },
+  ];
 
   return (
     <section className="about" id="about">
       <FadeIn as="h2" y={30} delay={0}>About me</FadeIn>
-      <FadeIn as="p" className="about-text" y={20} delay={0.1}>
-        {text}
+      {paragraphs.map((t, i) => (
+        <FadeIn as="p" className="about-text" y={20} delay={0.1 + i * 0.05} key={i}>
+          {t}
+        </FadeIn>
+      ))}
+      <FadeIn as="div" className="about-focus" y={20} delay={0.25}>
+        {focus.map((f) => (
+          <div className="about-focus-item" key={f.k}>
+            <span className="about-focus-key">{f.k}</span>
+            <span className="about-focus-val">{f.v}</span>
+          </div>
+        ))}
       </FadeIn>
-      <FadeIn y={20} delay={0.2}>
+      <FadeIn y={20} delay={0.3}>
         <a href="#contact" className="contact-btn">Get In Touch</a>
       </FadeIn>
     </section>

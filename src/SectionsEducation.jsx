@@ -1,4 +1,4 @@
-// Education section — sits between About and Experience (both dark theme).
+// Education section: sits between About and Experience (both dark theme).
 // Numbered layout mirrors the Experience section's card pattern.
 import { FadeIn } from "./Components.jsx";
 
@@ -8,7 +8,7 @@ const EDUCATION = [
     degree: 'Master of Science, Computer Science',
     school: 'University of Houston – Clear Lake',
     location: 'Houston, TX',
-    period: 'Aug 2024 — May 2026',
+    period: 'Aug 2024 – May 2026',
     gpa: 'GPA: 3.35 / 4.0',
   },
   {
@@ -16,7 +16,7 @@ const EDUCATION = [
     degree: 'Bachelor of Engineering, Computer Science / Information Technology',
     school: 'Silver Oak University',
     location: 'Gujarat, India',
-    period: 'Aug 2020 — May 2024',
+    period: 'Aug 2020 – May 2024',
     gpa: 'GPA: 3.84 / 4.0',
   },
 ];
